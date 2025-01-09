@@ -1,83 +1,23 @@
+import { useState } from "react";
 import Logo from "../../assets/react.svg";
-import { MdDashboard } from "react-icons/md";
-import { FaEarthAfrica } from "react-icons/fa6";
-import { FaBoxOpen } from "react-icons/fa";
-import { SlCalender } from "react-icons/sl";
-import { LuArrowDownUp } from "react-icons/lu";
-import { FaChartPie } from "react-icons/fa";
-import { FaBook } from "react-icons/fa6";
-import { GoGraph } from "react-icons/go";
-import { FaCamera } from "react-icons/fa";
-import { IoReload } from "react-icons/io5";
-import { FaMoneyBillAlt } from "react-icons/fa";
-import { FaDollarSign } from "react-icons/fa6";
+import { MenuList } from "../../utils/Menulist";
+import { IoMenu } from "react-icons/io5";
 
-const MenuList = [
-  {
-    name: "Dashboard",
-    Icon: MdDashboard,
-    href: "/dashboard",
-  },
-  {
-    name: "GlobalView",
-    Icon: FaEarthAfrica,
-    href: "/dashboard",
-  },
-  {
-    name: "Orders",
-    Icon: FaBoxOpen,
-    href: "/dashboard",
-  },
-  {
-    name: "Orders Summary",
-    Icon: SlCalender,
-    href: "/dashboard",
-  },
-  {
-    name: "P&L Report",
-    Icon: LuArrowDownUp,
-    href: "/dashboard",
-  },
-  {
-    name: "Profit by Product",
-    Icon: FaChartPie,
-    href: "/dashboard",
-  },
-  {
-    name: "Inventory",
-    Icon: FaBook,
-    href: "/dashboard",
-  },
-  {
-    name: "Refund",
-    Icon: FaDollarSign,
-    href: "/dashboard",
-  },
-  {
-    name: "Inventory Planning",
-    Icon: GoGraph,
-    href: "/dashboard",
-  },
-  {
-    name: "Snapshot",
-    Icon: FaCamera,
-    href: "/dashboard",
-  },
-  {
-    name: "Return Orders",
-    Icon: IoReload,
-    href: "/dashboard",
-  },
-  {
-    name: "Expenses",
-    Icon: FaMoneyBillAlt,
-    href: "/dashboard",
-  },
-];
 const Sidebar = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  console.log(isSidebarOpen);
+
+  // Function to toggle sidebar visibility
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
   return (
-    <div className="fixed top-0 left-0 w-60 bg-[#676a6c] h-full">
-      <nav>
+    <div className="">
+      <nav
+        className={`fixed top-0 left-0 bg-[#676a6c] h-full transition-transform duration-300 z-40 ${
+          isSidebarOpen ? "w-0" : "w-60"
+        } md:translate-x-0 md:block`}
+      >
         <div className="flex  items-center justify-center">
           <img
             src={Logo}
@@ -103,6 +43,14 @@ const Sidebar = () => {
           </ul>
         </div>
       </nav>
+      <button
+        className={`fixed top-4 transition-all duration-300 z-50 bg-gray-700 text-white p-2 rounded-md hover:bg-gray-600 ${
+          isSidebarOpen ? "left-0" : "left-2"
+        } md:left-60`}
+        onClick={toggleSidebar}
+      >
+        <IoMenu />
+      </button>
     </div>
   );
 };
