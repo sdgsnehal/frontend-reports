@@ -2,6 +2,7 @@ import { useState } from "react";
 import Logo from "../../assets/react.svg";
 import { MenuList } from "../../utils/Menulist";
 import { IoMenu } from "react-icons/io5";
+import Example from "../Dropdown/Dropdown";
 
 const Sidebar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -14,8 +15,8 @@ const Sidebar = () => {
   return (
     <div className="">
       <nav
-        className={`fixed top-0 left-0 bg-[#676a6c] h-full transition-transform duration-300 z-40 ${
-          isSidebarOpen ? "w-0" : "w-60"
+        className={`fixed top-0 left-0 bg-[#676a6c] h-full transition-transform duration-300 z-40 overflow-scroll ${
+          isSidebarOpen ? "w-0" : "w-full md:w-60"
         } md:translate-x-0 md:block`}
       >
         <div className="flex  items-center justify-center">
@@ -26,6 +27,10 @@ const Sidebar = () => {
             height={100}
             className="py-2 px-2"
           />
+        </div>
+        <div>
+          {" "}
+          <Example />
         </div>
         <div className="">
           <ul>
@@ -45,8 +50,8 @@ const Sidebar = () => {
       </nav>
       <button
         className={`fixed top-4 transition-all duration-300 z-50 bg-gray-700 text-white p-2 rounded-md hover:bg-gray-600 ${
-          isSidebarOpen ? "left-0" : "left-2"
-        } md:left-60`}
+          isSidebarOpen ? "left-2 md:left-2" : "left-2 md:left-60"
+        } `}
         onClick={toggleSidebar}
       >
         <IoMenu />
