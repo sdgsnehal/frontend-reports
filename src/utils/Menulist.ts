@@ -15,7 +15,7 @@ export const MenuList = [
   {
     name: "Dashboard",
     Icon: MdDashboard,
-    href: "/dashboard",
+    href: "/",
   },
   {
     name: "GlobalView",

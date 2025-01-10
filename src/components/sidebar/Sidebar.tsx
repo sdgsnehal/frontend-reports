@@ -1,62 +1,54 @@
-import { useState } from "react";
+import React from "react";
 import Logo from "../../assets/react.svg";
 import { MenuList } from "../../utils/Menulist";
-import { IoMenu } from "react-icons/io5";
 import Example from "../Dropdown/Dropdown";
 
-const Sidebar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  console.log(isSidebarOpen);
+interface SidebarProps {
+  isSidebarOpen: boolean;
+}
 
-  // Function to toggle sidebar visibility
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
   return (
-    <div className="">
-      <nav
-        className={`fixed top-0 left-0 bg-[#676a6c] h-full transition-transform duration-300 z-40 overflow-scroll ${
-          isSidebarOpen ? "w-0" : "w-full md:w-60"
-        } md:translate-x-0 md:block`}
-      >
-        <div className="flex  items-center justify-center">
-          <img
-            src={Logo}
-            alt="logo"
-            width={100}
-            height={100}
-            className="py-2 px-2"
-          />
-        </div>
-        <div>
-          {" "}
-          <Example />
-        </div>
-        <div className="">
-          <ul>
-            {MenuList.map((menu, index) => (
-              <li
-                key={index}
-                className="text-white text-sm font-medium flex  justify-start gap-2 px-4 py-2 hover:bg-[#56595c] cursor-pointer"
-              >
-                <menu.Icon className="h-4 w-4" />
-                <a href={menu.href} className="text-white">
-                  {menu.name}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </nav>
-      <button
-        className={`fixed top-4 transition-all duration-300 z-50 bg-gray-700 text-white p-2 rounded-md hover:bg-gray-600 ${
-          isSidebarOpen ? "left-2 md:left-2" : "left-2 md:left-60"
-        } `}
-        onClick={toggleSidebar}
-      >
-        <IoMenu />
-      </button>
-    </div>
+    <nav
+      className={`fixed top-0 left-0 bg-[#293846] h-full transition-transform duration-300 z-40 overflow-y-auto overflow-x-hidden scroll-smooth no-scrollbar ${
+        isSidebarOpen
+          ? "translate-x-0 w-full md:w-60"
+          : "-translate-x-full md:translate-x-0"
+      }`}
+    >
+      {/* Logo Section */}
+      <div className="flex items-center justify-center py-4">
+        <img
+          src={Logo}
+          alt="logo"
+          width={100}
+          height={100}
+          className="py-2 px-2"
+        />
+      </div>
+
+      {/* Dropdown Example */}
+      <div className="px-4">
+        <Example />
+      </div>
+
+      {/* Menu List */}
+      <div className="mt-4">
+        <ul>
+          {MenuList.map((menu, index) => (
+            <li
+              key={index}
+              className="text-white text-sm font-medium flex items-center gap-2 px-4 py-2 hover:bg-[#56595c] cursor-pointer"
+            >
+              <menu.Icon className="h-4 w-4" />
+              <a href={menu.href} className="text-white">
+                {menu.name}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </nav>
   );
 };
 
