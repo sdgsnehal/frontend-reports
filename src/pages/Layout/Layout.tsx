@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { IoMenu } from "react-icons/io5";
-import Dashboard from "../Dashboard";
+interface LayoutProps {
+  children: ReactNode; // ReactNode allows passing any valid React child elements
+}
 
-function Layout() {
+const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   return (
     <div className="w-full h-screen flex flex-col overflow-x-hidden">
@@ -25,11 +27,11 @@ function Layout() {
             isSidebarVisible ? "ml-0 md:ml-64" : ""
           }`}
         >
-          <Dashboard />
+          {children}
         </main>
       </div>
     </div>
   );
-}
+};
 
 export default Layout;
