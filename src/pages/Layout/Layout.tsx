@@ -7,7 +7,7 @@ import Dashboard from "../Dashboard";
 function Layout() {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
   return (
-    <div className="w-full h-screen flex flex-col">
+    <div className="w-full h-screen flex flex-col overflow-x-hidden">
       <header className="w-full h-16  flex items-center justify-between px-4 text-black">
         <button
           className={`fixed top-4 transition-all duration-300 z-50 bg-gray-700 text-white p-2 rounded-md hover:bg-gray-600 ${
@@ -22,7 +22,7 @@ function Layout() {
       <div className="flex  w-full">
         {isSidebarVisible && <Sidebar isSidebarOpen={isSidebarVisible} />}
         <main
-          className={`flex-1 p-4 bg-gray-100 ${
+          className={`flex-1 p-4 bg-gray-100 overflow-x-hidden${
             isSidebarVisible ? "ml-0 md:ml-64" : ""
           }`}
         >
