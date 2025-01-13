@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import { useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
 import { IoMenu } from "react-icons/io5";
 import Dashboard from "../Dashboard";
@@ -22,7 +21,7 @@ function Layout() {
       <div className="flex  w-full">
         {isSidebarVisible && <Sidebar isSidebarOpen={isSidebarVisible} />}
         <main
-          className={`flex-1 p-4 bg-gray-100 overflow-x-hidden${
+          className={`flex-1 p-4 bg-gray-200 overflow-x-hidden${
             isSidebarVisible ? "ml-0 md:ml-64" : ""
           }`}
         >
