@@ -20,36 +20,61 @@ export default function Example() {
   const [selected, setSelected] = useState(people[1]);
 
   return (
-    <div className="mx-auto  w-52 pt-20">
-      <Listbox value={selected} onChange={setSelected} __demoMode>
+    <div className="mx-auto w-52 pt-20">
+      <Listbox value={selected} onChange={setSelected}>
+        {/* Button to toggle dropdown */}
         <ListboxButton
           className={clsx(
-            "relative block w-full rounded-lg bg-white/5 py-1.5 pr-8 pl-3 text-left text-sm/6 text-white",
-            "focus:outline-none data-[focus]:outline-2 data-[focus]:-outline-offset-2 data-[focus]:outline-white/25"
+            "relative block w-full rounded-lg bg-gray-700 py-1.5 pr-8 pl-3 text-left text-sm text-white",
+            "focus:outline-none focus:ring-2 focus:ring-white"
           )}
         >
-          {selected.name}
+          <span>{selected.name}</span>
           <ChevronDownIcon
-            className="group pointer-events-none absolute top-2.5 right-2.5 size-4 fill-white/60"
+            className="pointer-events-none absolute top-2.5 right-2.5 h-5 w-5 text-white"
             aria-hidden="true"
           />
         </ListboxButton>
+
+        {/* Dropdown options */}
         <ListboxOptions
-          anchor="bottom"
-          transition
           className={clsx(
-            "w-[var(--button-width)] rounded-xl border border-white/5 bg-white/5 p-1 [--anchor-gap:var(--spacing-1)] focus:outline-none",
-            "transition duration-100 ease-in data-[leave]:data-[closed]:opacity-0"
+            "absolute mt-1 max-h-60 w-56 overflow-auto rounded-lg bg-gray-700 text-white shadow-lg z-10",
+            "focus:outline-none"
           )}
         >
           {people.map((person) => (
             <ListboxOption
-              key={person.name}
+              key={person.id}
               value={person}
-              className="group flex cursor-default items-center gap-2 rounded-lg py-1.5 px-3 select-none data-[focus]:bg-white/10"
+              className={({ active, selected }) =>
+                clsx(
+                  "cursor-pointer select-none relative py-2 pl-10 pr-4",
+                  active ? "bg-gray-600 text-white" : "text-gray-300",
+                  selected ? "font-medium" : "font-normal"
+                )
+              }
             >
-              <CheckIcon className="invisible size-4 fill-white group-data-[selected]:visible" />
-              <div className="text-sm/6 text-white">{person.name}</div>
+              {({ selected }) => (
+                <>
+                  <span
+                    className={clsx(
+                      "block truncate",
+                      selected ? "font-medium" : "font-normal"
+                    )}
+                  >
+                    {person.name}
+                  </span>
+                  {selected ? (
+                    <span className="absolute inset-y-0 left-0 flex items-center pl-3">
+                      <CheckIcon
+                        className="h-5 w-5 text-green-500"
+                        aria-hidden="true"
+                      />
+                    </span>
+                  ) : null}
+                </>
+              )}
             </ListboxOption>
           ))}
         </ListboxOptions>

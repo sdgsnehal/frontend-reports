@@ -20,7 +20,7 @@ export const MenuList = [
   {
     name: "GlobalView",
     Icon: FaEarthAfrica,
-    href: "/dashboard",
+    href: "/global",
   },
   {
     name: "Orders",
