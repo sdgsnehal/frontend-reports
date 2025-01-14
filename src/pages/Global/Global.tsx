@@ -2,11 +2,9 @@ import Layout from "../Layout/Layout";
 import GlobalTable from "../../components/Table/Global/GlobalTable";
 import Dropdown from "../../components/Dropdown/Dropdown";
 const people = [
-  { id: 1, name: "Tom Cook" },
-  { id: 2, name: "Wade Cooper" },
-  { id: 3, name: "Tanya Fox" },
-  { id: 4, name: "Arlene Mccoy" },
-  { id: 5, name: "Devon Webb" },
+  { id: 1, name: "Last 30 Days" },
+  { id: 2, name: "This Month" },
+  { id: 3, name: "Last Month" },
 ];
 
 const Global = () => {
@@ -16,7 +14,7 @@ const Global = () => {
         <div className=" ">
           <div>SELECT DATE RANGE</div>
           <span>
-            <Dropdown Items={people} />
+            <Dropdown Items={people} Light={true} />
           </span>
         </div>
         <GlobalTable />

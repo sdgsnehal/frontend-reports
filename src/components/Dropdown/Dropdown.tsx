@@ -10,24 +10,29 @@ import { useState } from "react";
 
 interface DropdownProps {
   Items: { id: number; name: string }[];
+  Light?: boolean;
 }
 
-export default function Dropdown({ Items }: DropdownProps) {
+export default function Dropdown({ Items, Light }: DropdownProps) {
   const [selected, setSelected] = useState(Items[1]);
 
   return (
-    <div className="mx-auto w-52 pt-20">
+    <div className=" w-52 ">
       <Listbox value={selected} onChange={setSelected}>
         {/* Button to toggle dropdown */}
         <ListboxButton
           className={clsx(
-            "relative block w-full rounded-lg bg-gray-700 py-1.5 pr-8 pl-3 text-left text-sm text-white",
+            "relative block w-full rounded-lg py-1.5 pr-8 pl-3 text-left text-sm",
+            Light === true ? "bg-white text-black" : "bg-gray-700 text-white",
             "focus:outline-none focus:ring-2 focus:ring-white"
           )}
         >
           <span>{selected.name}</span>
           <ChevronDownIcon
-            className="pointer-events-none absolute top-2.5 right-2.5 h-5 w-5 text-white"
+            className={clsx(
+              "pointer-events-none absolute top-2.5 right-2.5 h-5 w-5 ",
+              Light === true ? "text-black" : "text-white"
+            )}
             aria-hidden="true"
           />
         </ListboxButton>
@@ -36,6 +41,7 @@ export default function Dropdown({ Items }: DropdownProps) {
         <ListboxOptions
           className={clsx(
             "absolute mt-1 max-h-60 w-56 overflow-auto rounded-lg bg-gray-700 text-white shadow-lg z-10",
+            Light === true ? "bg-white text-black" : "bg-gray-700 text-white",
             "focus:outline-none"
           )}
         >
@@ -46,7 +52,7 @@ export default function Dropdown({ Items }: DropdownProps) {
               className={({ active, selected }) =>
                 clsx(
                   "cursor-pointer select-none relative py-2 pl-10 pr-4",
-                  active ? "bg-gray-600 text-white" : "text-gray-300",
+                  active ? "bg-gray-600 text-white" : "text-black",
                   selected ? "font-medium" : "font-normal"
                 )
               }
