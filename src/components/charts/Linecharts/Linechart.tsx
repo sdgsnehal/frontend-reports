@@ -10,8 +10,16 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
+type LegendPosition =
+  | "top"
+  | "left"
+  | "right"
+  | "bottom"
+  | "center"
+  | "chartArea";
 interface LinechartProps {
   title: string;
+  legend?: LegendPosition;
 }
 
 ChartJS.register(
@@ -52,12 +60,12 @@ export const data = {
   ],
 };
 
-export function Linechart({ title }: LinechartProps) {
+export function Linechart({ title, legend = "top" }: LinechartProps) {
   const options = {
     responsive: true,
     plugins: {
       legend: {
-        position: "top" as const,
+        position: legend,
       },
       title: {
         display: true,
