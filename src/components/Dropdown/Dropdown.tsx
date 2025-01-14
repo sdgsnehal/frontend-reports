@@ -8,16 +8,12 @@ import { CheckIcon, ChevronDownIcon } from "@heroicons/react/20/solid";
 import clsx from "clsx";
 import { useState } from "react";
 
-const people = [
-  { id: 1, name: "Tom Cook" },
-  { id: 2, name: "Wade Cooper" },
-  { id: 3, name: "Tanya Fox" },
-  { id: 4, name: "Arlene Mccoy" },
-  { id: 5, name: "Devon Webb" },
-];
+interface DropdownProps {
+  Items: { id: number; name: string }[];
+}
 
-export default function Example() {
-  const [selected, setSelected] = useState(people[1]);
+export default function Dropdown({ Items }: DropdownProps) {
+  const [selected, setSelected] = useState(Items[1]);
 
   return (
     <div className="mx-auto w-52 pt-20">
@@ -43,7 +39,7 @@ export default function Example() {
             "focus:outline-none"
           )}
         >
-          {people.map((person) => (
+          {Items.map((person) => (
             <ListboxOption
               key={person.id}
               value={person}

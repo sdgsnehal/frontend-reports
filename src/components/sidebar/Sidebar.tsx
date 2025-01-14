@@ -1,12 +1,18 @@
 import React from "react";
 import Logo from "../../assets/react.svg";
 import { MenuList } from "../../utils/Menulist";
-import Example from "../Dropdown/Dropdown";
+import Dropdown from "../Dropdown/Dropdown";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
 }
-
+const people = [
+  { id: 1, name: "Tom Cook" },
+  { id: 2, name: "Wade Cooper" },
+  { id: 3, name: "Tanya Fox" },
+  { id: 4, name: "Arlene Mccoy" },
+  { id: 5, name: "Devon Webb" },
+];
 const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
   return (
     <nav
@@ -29,7 +35,7 @@ const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
 
       {/* Dropdown Example */}
       <div className="px-4">
-        <Example />
+        <Dropdown Items={people} />
       </div>
 
       {/* Menu List */}
