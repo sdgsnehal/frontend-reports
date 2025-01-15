@@ -25,7 +25,7 @@ export const MenuList = [
   {
     name: "Orders",
     Icon: FaBoxOpen,
-    href: "/dashboard",
+    href: "/order",
   },
   {
     name: "Orders Summary",

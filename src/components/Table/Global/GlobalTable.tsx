@@ -1,27 +1,11 @@
 import React from "react";
-
-const GlobalTable = () => {
-  const data = [
-    {
-      No: "1",
-      StoreEmail: "sdgsnehal@gmail.com",
-      Revenue: "5822",
-      UnitsSold: "568",
-      CostOfGoods: "5852",
-      Referral: "258",
-      FBAFullfillment: "585",
-      Shipping: "455",
-      Adv: "8586",
-      Promotions: "1455",
-      CouponRedemption: "58",
-      Storage: "144",
-      InboundTransportation: "44545",
-      Profit: "44",
-      Tacos: "455",
-      Noofsku: "25",
-      NoofCost: "445",
-    },
-  ];
+interface GlobalTableProps<T> {
+  data: T[];
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const GlobalTable = <T extends Record<string, any>>({
+  data,
+}: GlobalTableProps<T>) => {
   return (
     <div className="w-full max-h-[400px] max-w-[1200px] relative overflow-auto">
       <table className="w-full text-xs border-[1px] border-[#E7E7E7] border-separate border-spacing-0">

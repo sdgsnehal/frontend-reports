@@ -23,7 +23,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       <div className="flex  w-full">
         {isSidebarVisible && <Sidebar isSidebarOpen={isSidebarVisible} />}
         <main
-          className={`flex-1 p-4 bg-gray-200 overflow-x-hidden${
+          className={`flex-1 p-4 bg-gray-200 overflow-x-hidden no-scrollbar  ${
             isSidebarVisible ? "ml-0 md:ml-60" : ""
           }`}
         >
