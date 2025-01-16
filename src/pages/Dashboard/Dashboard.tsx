@@ -1,10 +1,12 @@
 import { Linechart } from "../../components/charts/Linecharts/Linechart";
 import TransposedTable from "../../components/Table/Table";
 import Layout from "../Layout/Layout";
+import { useQuery } from "@tanstack/react-query";
 interface ChartheadingProps {
   ChartName: string;
   Value: string;
 }
+
 const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
   return (
     <div className="flex flex-row gap-2 items-start justify-start font-semibold">
@@ -12,8 +14,18 @@ const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
     </div>
   );
 };
-
+const fetchDashboard = async () => {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_ENDPOINT}/api/v1/sales/dashboard?startDate=2024-12-25&endDate=2024-12-30`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch todos");
+  }
+  return response;
+};
 const Dashboard = () => {
+  const info = useQuery({ queryKey: ["todos"], queryFn: fetchDashboard });
+  console.log(info);
   return (
     <Layout>
       <div className="w-full  h-full overflow-x-hidden p-4 mx-auto">

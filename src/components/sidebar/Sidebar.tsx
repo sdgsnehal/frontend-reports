@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../assets/react.svg";
 import { MenuList } from "../../utils/Menulist";
 import Dropdown from "../Dropdown/Dropdown";
@@ -14,6 +14,10 @@ const people = [
   { id: 5, name: "Devon Webb" },
 ];
 const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const handleMenuClick = (menuName: string) => {
+    setActiveMenu(menuName);
+  };
   return (
     <nav
       className={`fixed top-0 left-0 bg-[#293846] h-full transition-transform duration-300 z-40 overflow-y-auto overflow-x-hidden scroll-smooth no-scrollbar ${
@@ -44,7 +48,12 @@ const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
           {MenuList.map((menu, index) => (
             <li
               key={index}
-              className="text-white text-sm font-medium flex items-center gap-2 px-4 py-2 hover:bg-[#56595c] cursor-pointer"
+              onClick={() => handleMenuClick(menu.name)}
+              className={`text-sm font-medium flex items-center gap-2 px-4 py-2 cursor-pointer ${
+                activeMenu === menu.name
+                  ? "bg-[red] text-white"
+                  : "text-white hover:bg-[#56595c]"
+              }`}
             >
               <menu.Icon className="h-4 w-4" />
               <a href={menu.href} className="text-white">
