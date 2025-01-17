@@ -1,10 +1,19 @@
+import { useState } from "react";
 import { Linechart } from "../../components/charts/Linecharts/Linechart";
+import DashboardDropdown from "../../components/Dropdown/Dashboard/DashboardDropdown";
 import TransposedTable from "../../components/Table/Table";
+
 import Layout from "../Layout/Layout";
-import { useQuery } from "@tanstack/react-query";
+interface DashboardData {
+  totalSales: number;
+  totalProfit: number;
+  totalOrder: number;
+  averageOrderValue: number;
+}
+
 interface ChartheadingProps {
   ChartName: string;
-  Value: string;
+  Value: number;
 }
 
 const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
@@ -14,36 +23,48 @@ const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
     </div>
   );
 };
-const fetchDashboard = async () => {
-  const response = await fetch(
-    `${import.meta.env.VITE_API_ENDPOINT}/api/v1/sales/dashboard?startDate=2024-12-25&endDate=2024-12-30`
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch todos");
-  }
-  return response;
-};
+
 const Dashboard = () => {
-  const info = useQuery({ queryKey: ["todos"], queryFn: fetchDashboard });
-  console.log(info);
+  const [dashboardData, setDashboardData] = useState<DashboardData>(null);
+  const handleFetchedData = (data: any) => {
+    console.log("Fetched data from modal:", data);
+    setDashboardData(data); // Store the data or trigger further actions
+  };
+  console.log(dashboardData);
   return (
     <Layout>
       <div className="w-full  h-full overflow-x-hidden p-4 mx-auto">
+        <div className="pb-4">
+          <DashboardDropdown onDataFetched={handleFetchedData} />
+        </div>
+
         <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 mx-auto">
           <div className="chart-container">
-            <Chartheading ChartName="Total Sales" Value="200" />
+            <Chartheading
+              ChartName="Total Sales"
+              Value={dashboardData?.totalSales}
+            />
             <Linechart title="Total Sales" />
           </div>
           <div className="chart-container ">
-            <Chartheading ChartName="Total Profit" Value="300" />
+            <Chartheading
+              ChartName="Total Profit"
+              Value={dashboardData?.totalSales}
+            />
             <Linechart title="Total Profit" />
           </div>
           <div className="chart-container ">
-            <Chartheading ChartName="Total Order" Value="500" />
+            <Chartheading
+              ChartName="Total Order"
+              Value={dashboardData?.quantity}
+            />
             <Linechart title="Total Order" />
           </div>
           <div className="chart-container ">
-            <Chartheading ChartName="Average Order" Value="900" />
+            <Chartheading
+              ChartName="Average Order"
+              Value={dashboardData?.totalAvgOrderValue}
+            />
             <Linechart title="Average Order Value" />
           </div>
         </div>
