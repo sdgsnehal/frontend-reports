@@ -2,8 +2,10 @@ import { useState } from "react";
 import { Linechart } from "../../components/charts/Linecharts/Linechart";
 import DashboardDropdown from "../../components/Dropdown/Dashboard/DashboardDropdown";
 import TransposedTable from "../../components/Table/Table";
+import { data12, data6 } from "../../utils/Constants";
 
 import Layout from "../Layout/Layout";
+import Dailysummary from "../../components/Table/DailySummary/Dailysummary";
 interface DashboardData {
   totalSales: number;
   totalProfit: number;
@@ -70,7 +72,11 @@ const Dashboard = () => {
         </div>
         <div className="mt-6  bg-white/50 border-1 border-gray-500 rounded-xl flex items-center justify-center flex-col">
           <div>Last 6 month summary</div>
-          <TransposedTable />
+          <TransposedTable data={data12} />
+        </div>
+        <div className="mt-6  bg-white/50 border-1 border-gray-500 rounded-xl flex items-center justify-center flex-col">
+          <div>Last 6 Days summary</div>
+          <Dailysummary data={data6} />
         </div>
       </div>
     </Layout>

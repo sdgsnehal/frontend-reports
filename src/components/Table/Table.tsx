@@ -1,98 +1,12 @@
-import React from "react";
 
-const TransposedTable = () => {
-  const data = [
-    {
-      month: "August/2024",
-      revenue: "$279,544.40",
-      revenueChange: "15%",
-      revenueTrend: "up",
-      costOfGoods: "$80,420.14",
-      refundCost: "$4,668.17",
-      fulfillment: "$98,532.32",
-      advertisingFees: "$12,823.33",
-      inventoryFees: "$2,507.99",
-      profit: "$80,306.54",
-      profitChange: "35%",
-      profitTrend: "up",
-      unitsSold: "13,704",
-    },
-    {
-      month: "September/2024",
-      revenue: "$226,852.81",
-      revenueChange: "-19%",
-      revenueTrend: "down",
-      costOfGoods: "$62,883.11",
-      refundCost: "$3,481.07",
-      fulfillment: "$79,433.48",
-      advertisingFees: "$13,023.39",
-      inventoryFees: "$2,284.81",
-      profit: "$64,548.97",
-      profitChange: "-20%",
-      profitTrend: "down",
-      unitsSold: "10,949",
-    },
-    {
-      month: "October/2024",
-      revenue: "$226,852.81",
-      revenueChange: "-19%",
-      revenueTrend: "down",
-      costOfGoods: "$62,883.11",
-      refundCost: "$3,481.07",
-      fulfillment: "$79,433.48",
-      advertisingFees: "$13,023.39",
-      inventoryFees: "$2,284.81",
-      profit: "$64,548.97",
-      profitChange: "-20%",
-      profitTrend: "down",
-      unitsSold: "10,949",
-    },
-    {
-      month: "October/2024",
-      revenue: "$226,852.81",
-      revenueChange: "-19%",
-      revenueTrend: "down",
-      costOfGoods: "$62,883.11",
-      refundCost: "$3,481.07",
-      fulfillment: "$79,433.48",
-      advertisingFees: "$13,023.39",
-      inventoryFees: "$2,284.81",
-      profit: "$64,548.97",
-      profitChange: "-20%",
-      profitTrend: "down",
-      unitsSold: "10,949",
-    },
-    {
-      month: "October/2024",
-      revenue: "$226,852.81",
-      revenueChange: "-19%",
-      revenueTrend: "down",
-      costOfGoods: "$62,883.11",
-      refundCost: "$3,481.07",
-      fulfillment: "$79,433.48",
-      advertisingFees: "$13,023.39",
-      inventoryFees: "$2,284.81",
-      profit: "$64,548.97",
-      profitChange: "-20%",
-      profitTrend: "down",
-      unitsSold: "10,949",
-    },
-    {
-      month: "October/2024",
-      revenue: "$226,852.81",
-      revenueChange: "-19%",
-      revenueTrend: "down",
-      costOfGoods: "$62,883.11",
-      refundCost: "$3,481.07",
-      fulfillment: "$79,433.48",
-      advertisingFees: "$13,023.39",
-      inventoryFees: "$2,284.81",
-      profit: "$64,548.97",
-      profitChange: "-20%",
-      profitTrend: "down",
-      unitsSold: "10,949",
-    },
-  ];
+interface TransposedTableProps<T> {
+  data: T[];
+}
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const TransposedTable = <T extends Record<string, any>>({
+  data,
+}: TransposedTableProps<T>) => {
+  //
 
   return (
     <div className="w-full max-h-[400px] max-w-[1200px] relative overflow-auto">
