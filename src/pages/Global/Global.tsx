@@ -12,26 +12,25 @@ const people = [
 const Global = () => {
   return (
     <Layout>
-      <div className="">
-        <div className="chart-container">
-          <div className="px-4 py-2">
-            <div className="text-lg font-semibold py-2 px-4">
-              SELECT DATE RANGE
-            </div>
-            <div className="py-1 px-1">
-              <Dropdown Items={people} Light={true} />
-            </div>
+      <div className="chart-container">
+        <div className="px-4 py-2">
+          <div className="text-lg font-semibold py-2 px-4">
+            SELECT DATE RANGE
           </div>
-          <GlobalTable data={data} />
-        </div>
-        <div className="w-60% h-96 chart-container mt-4">
-          <div className="text-lg font-semibold py-2 px-7">
-            SELECT AN ACCOUNT
-          </div>
-          <div className="py-1 px-5">
+          <div className="py-1 px-1">
             <Dropdown Items={people} Light={true} />
           </div>
+        </div>
+        <GlobalTable data={data} />
+      </div>
+      <div className="w-full bg-white/50  border-gray-500 rounded-xl flex flex-col p-1 mt-4">
+        <div className="text-lg font-semibold py-2 px-7 ">
+          SELECT AN ACCOUNT
+        </div>
 
+        <Dropdown Items={people} Light={true} />
+
+        <div className="w-full h-1/2 flex items-center justify-center">
           <Linechart title="Last 6 Months" legend="right" />
         </div>
       </div>
