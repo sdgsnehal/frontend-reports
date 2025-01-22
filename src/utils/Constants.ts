@@ -1,7 +1,21 @@
 export const DateRange = [
-  { id: 1, name: "Last 30 Days" },
-  { id: 2, name: "This Month" },
-  { id: 3, name: "Last Month" },
+  { id: 1, name: "Today" },
+  { id: 2, name: "Yesterday" },
+  { id: 3, name: "Last 7 Days" },
+  { id: 4, name: "Last 30 Days" },
+  { id: 5, name: "Last 90 Days" },
+  { id: 6, name: "Last Month" },
+  { id: 7, name: "Last Year" },
+  { id: 8, name: "Last 12 Months" },
+  { id: 9, name: "Week To Date" },
+  { id: 10, name: "Month To Date" },
+  { id: 11, name: "Quarter To Date" },
+  { id: 12, name: "Year To Date" },
+  { id: 13, name: "4th Quarter" },
+  { id: 14, name: "3rd Quarter" },
+  { id: 15, name: "2nd Quarter" },
+  { id: 16, name: "1st Quarter" },
+  { id: 17, name: "Custom" },
 ];
 export const data12 = [
   {
