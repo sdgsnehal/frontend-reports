@@ -4,11 +4,11 @@ import { InformationCircleIcon } from "@heroicons/react/16/solid";
 import DashboardDropdown from "../../components/Dropdown/Dashboard/DashboardDropdown";
 import TransposedTable from "../../components/Table/Table";
 import { data12, data6 } from "../../utils/Constants";
-
 import Layout from "../Layout/Layout";
 import Dailysummary from "../../components/Table/DailySummary/Dailysummary";
 import CheckboxComponent from "../../components/checkbox/Checkbox";
 import Tooltip from "../../components/Tooltip";
+import CardComponent from "../../components/card";
 interface DashboardData {
   totalSales: number;
   totalProfit: number;
@@ -97,15 +97,12 @@ const Dashboard = () => {
             <p className="text-sm font-medium">MFN</p>
           </div>
         </div>
-        <div className="text-black flex flex-col border-1 border-gray-500 rounded-xl">
-          <div className="flex items-center gap-1">
-            <p className="text-xl font-bold">Total Products</p>
-            <Tooltip content="hello" position="right">
-              <InformationCircleIcon className="w-4 h-4" />
-            </Tooltip>
-          </div>
-
-          <p>2505</p>
+        <div className="flex flex-col md:flex-row gap-4 justify-center items-center mt-2">
+          <CardComponent />
+          <CardComponent />
+          <CardComponent />
+          <CardComponent />
+          <CardComponent />
         </div>
       </div>
     </Layout>
