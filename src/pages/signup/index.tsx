@@ -1,6 +1,22 @@
 import ReCAPTCHA from "react-google-recaptcha";
+import { Controller, useForm } from "react-hook-form";
+import { messages } from "../../Language";
+type FormValues = {
+  email: string;
+  name: string;
+  password: string;
+};
 
 const Signup = () => {
+  const {
+    handleSubmit,
+    control,
+    formState: { errors },
+  } = useForm<FormValues>({});
+  const onSubmit = async (values: FormValues) => {
+    const { email, password, name } = values;
+    console.log(email, password, name);
+  };
   return (
     <div className="flex flex-col justify-center items-center w-full">
       <header className="bg-[#536c8c] flex items-center justify-center w-full sticky top-0">
@@ -10,7 +26,10 @@ const Signup = () => {
         Let's get you started with Reports
       </h3>
 
-      <form className="bg-white p-4 w-full md:w-1/3 rounded-lg shadow-md">
+      <form
+        className="bg-white p-4 w-full md:w-1/3 rounded-lg shadow-md"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <p className="text-lg font-semibold text-center text-black">
           First you will need to create the account
         </p>
@@ -46,24 +65,57 @@ const Signup = () => {
           <div className="h-px w-full bg-gray-500"></div>
         </div>
         <div className="relative mt-4">
-          <input
-            type="email"
-            placeholder="Enter email"
-            className="w-full bg-white p-4 pr-12 text-sm border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          <Controller
+            control={control}
+            rules={{
+              required: messages.VALIDATIONS.INVALID_EMAIL_ADDRESS,
+              pattern: {
+                value: /\S+@\S+\.\S+/,
+                message: messages.VALIDATIONS.INVALID_EMAIL_ADDRESS,
+              },
+            }}
+            render={({ field: { onChange, value } }) => (
+              <input
+                type="email"
+                placeholder="Enter email"
+                required
+                onChange={onChange}
+                value={value}
+                className="w-full bg-white p-4 pr-12 text-sm border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            )}
+            name="email"
           />
         </div>
         <div className="relative mt-4">
-          <input
-            type="text"
-            placeholder="Enter name"
-            className="w-full bg-white p-4 text-sm border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <input
+                type="text"
+                placeholder="Enter name"
+                onChange={onChange}
+                value={value}
+                className="w-full bg-white p-4 text-sm border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            )}
+            name="name"
           />
         </div>
         <div className="relative mt-4">
-          <input
-            type="password"
-            placeholder="Enter password"
-            className="w-full bg-white p-4 text-sm border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+          <Controller
+            control={control}
+            render={({ field: { onChange, value } }) => (
+              <input
+                type="password"
+                value={value}
+                onChange={onChange}
+                required
+                placeholder="Enter password"
+                className="w-full bg-white p-4 text-sm border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            )}
+            name="password"
           />
         </div>
         <ReCAPTCHA
