@@ -1,6 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import secureLocalStorage from "react-secure-storage";
 import { messages } from "../../Language/en";
+import { useNavigate } from "react-router-dom";
 type FormValues = {
   email: string;
   password: string;
@@ -18,6 +19,7 @@ const getDefaultValues = () => {
   };
 };
 const Login = () => {
+  const navigate = useNavigate();
   const {
     handleSubmit,
     control,
@@ -27,6 +29,7 @@ const Login = () => {
   });
   const onSubmit = async (values: FormValues) => {
     const { email, password } = values;
+    navigate("/dashboard");
     console.log(email, password);
   };
   return (

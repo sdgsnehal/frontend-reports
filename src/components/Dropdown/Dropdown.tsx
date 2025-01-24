@@ -11,14 +11,19 @@ import { useState } from "react";
 interface DropdownProps {
   Items: { id: number; name: string }[];
   Light?: boolean;
+  onChange: (selectedItem: { id: number; name: string }) => void;
 }
 
-export default function Dropdown({ Items, Light }: DropdownProps) {
-  const [selected, setSelected] = useState(Items[1]);
+export default function Dropdown({ Items, Light, onChange }: DropdownProps) {
+  const [selected, setSelected] = useState(Items[0]);
+  const handleSelection = (item: { id: number; name: string }) => {
+    setSelected(item);
+    onChange(item);
+  };
 
   return (
     <div className=" w-52 ">
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={handleSelection}>
         {/* Button to toggle dropdown */}
         <ListboxButton
           className={clsx(

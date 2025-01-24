@@ -15,7 +15,7 @@ export const MenuList = [
   {
     name: "Dashboard",
     Icon: MdDashboard,
-    href: "/",
+    href: "/dashboard",
   },
   {
     name: "GlobalView",
@@ -30,46 +30,46 @@ export const MenuList = [
   {
     name: "Orders Summary",
     Icon: SlCalender,
-    href: "/dashboard",
+    href: "/summary",
   },
   {
     name: "P&L Report",
     Icon: LuArrowDownUp,
-    href: "/dashboard",
+    href: "/report",
   },
   {
     name: "Profit by Product",
     Icon: FaChartPie,
-    href: "/dashboard",
+    href: "/product",
   },
   {
     name: "Inventory",
     Icon: FaBook,
-    href: "/dashboard",
+    href: "/inventory",
   },
   {
     name: "Refund",
     Icon: FaDollarSign,
-    href: "/dashboard",
+    href: "/refund",
   },
   {
     name: "Inventory Planning",
     Icon: GoGraph,
-    href: "/dashboard",
+    href: "/planning",
   },
   {
     name: "Snapshot",
     Icon: FaCamera,
-    href: "/dashboard",
+    href: "/snapshot",
   },
   {
     name: "Return Orders",
     Icon: IoReload,
-    href: "/dashboard",
+    href: "/return",
   },
   {
     name: "Expenses",
     Icon: FaMoneyBillAlt,
-    href: "/dashboard",
+    href: "/expenses",
   },
 ];
