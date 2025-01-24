@@ -132,3 +132,7 @@ export const data6 = [
     unitsSold: "13,704",
   },
 ];
+export const MerchantList = [
+  { id: 1, name: "Kavas" },
+  { id: 2, name: "Usc" },
+];

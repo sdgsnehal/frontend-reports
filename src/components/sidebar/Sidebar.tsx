@@ -2,17 +2,12 @@ import React, { useState } from "react";
 import Logo from "../../assets/react.svg";
 import { MenuList } from "../../utils/Menulist";
 import Dropdown from "../Dropdown/Dropdown";
+import { MerchantList } from "../../utils/Constants";
 
 interface SidebarProps {
   isSidebarOpen: boolean;
 }
-const people = [
-  { id: 1, name: "Tom Cook" },
-  { id: 2, name: "Wade Cooper" },
-  { id: 3, name: "Tanya Fox" },
-  { id: 4, name: "Arlene Mccoy" },
-  { id: 5, name: "Devon Webb" },
-];
+
 const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const handleMenuClick = (menuName: string) => {
@@ -39,7 +34,7 @@ const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
 
       {/* Dropdown Example */}
       <div className="px-4">
-        <Dropdown Items={people} />
+        <Dropdown Items={MerchantList} />
       </div>
 
       {/* Menu List */}
