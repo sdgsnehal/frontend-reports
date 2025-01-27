@@ -15,7 +15,7 @@ export function useSalesDashboard({
   return useQuery({
     queryKey: ["sales-dashboard", startDate, endDate, merchantId],
     queryFn: async () => {
-      const response = await API("get", "/sales/dashboard", {
+      const response = await API("get", "/api/v1/fetch/dashboard", {
         params: { startDate, endDate, merchantId },
       });
       return response.data;

@@ -133,6 +133,6 @@ export const data6 = [
   },
 ];
 export const MerchantList = [
-  { id: 1, name: "Kavas" },
+  { id: "67950e64b58a31269ec47bdc", name: "Kavas" },
   { id: 2, name: "Usc" },
 ];

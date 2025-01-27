@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 export interface MerchantState {
-  id: number;
+  id: string;
   name: string;
 }
 const initialState: MerchantState = {
-  id: 1,
+  id: "67950e64b58a31269ec47bdc",
   name: "Kavas",
 };
 export const merchantSlice = createSlice({

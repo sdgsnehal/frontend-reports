@@ -1,62 +1,34 @@
-import {
-  Button,
-  Dialog,
-  DialogPanel,
-  DialogTitle,
-  Label,
-} from "@headlessui/react";
+import { Button, Dialog, DialogPanel } from "@headlessui/react";
 import { useState } from "react";
 import Dropdown from "../Dropdown";
 import { DateRange } from "../../../utils/Constants";
 import DatePicker from "react-datepicker";
 import CheckboxComponent from "../../checkbox/Checkbox";
+import { useSalesDashboard } from "../../../pages/Dashboard/service.dashboard";
 import {
   ChevronDownIcon,
   CalendarDateRangeIcon,
 } from "@heroicons/react/20/solid";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store/store";
+
 type MyModalProps = {
   onDataFetched: (data: any) => void;
 };
 
 export default function MyModal({ onDataFetched }: MyModalProps) {
+  const merchantId = useSelector((state: RootState) => state.merchant.id);
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const queryClient = useQueryClient();
-
-  const fetchDashboard = async ({
-    queryKey,
-  }: {
-    queryKey: [string, { startDate: Date | null; endDate: Date | null }];
-  }) => {
-    const [_key, { startDate, endDate }] = queryKey;
-
-    if (!startDate || !endDate) {
-      throw new Error("Start and end dates are required");
-    }
-
-    const response = await fetch(
-      `${import.meta.env.VITE_API_ENDPOINT}/api/v1/sales/dashboard?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`
-    );
-    if (!response.ok) {
-      throw new Error("Failed to fetch data");
-    }
-    return response.json();
-  };
-  const { data, isSuccess } = useQuery({
-    queryKey: ["dashboard", { startDate, endDate }],
-    queryFn: fetchDashboard,
-    enabled: Boolean(startDate && endDate),
+  const { data } = useSalesDashboard({
+    startDate: startDate?.toISOString() ?? "",
+    endDate: endDate?.toISOString() ?? "",
+    merchantId,
   });
-  if (isSuccess) {
-    onDataFetched(data.data);
-  }
+  console.log(data);
   function apply() {
     if (startDate && endDate) {
-      queryClient.invalidateQueries({
-        queryKey: ["dashboard"],
-      });
       close();
     } else {
       console.error("Please select valid start and end dates");
