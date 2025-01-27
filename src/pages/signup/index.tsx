@@ -1,21 +1,25 @@
 import ReCAPTCHA from "react-google-recaptcha";
 import { Controller, useForm } from "react-hook-form";
 import { messages } from "../../Language";
+import { useSignup } from "./service.signup";
 type FormValues = {
   email: string;
-  name: string;
+  fullName: string;
   password: string;
+  userName: string;
 };
 
 const Signup = () => {
+  const SignupMutation = useSignup();
   const {
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<FormValues>({});
   const onSubmit = async (values: FormValues) => {
-    const { email, password, name } = values;
-    console.log(email, password, name);
+    const { email, password, fullName, userName } = values;
+    SignupMutation.mutate({ ...values, email: values.email.trim() });
+    console.log(email, password, fullName);
   };
   return (
     <div className="flex flex-col justify-center items-center w-full">
@@ -67,6 +71,21 @@ const Signup = () => {
         <div className="relative mt-4">
           <Controller
             control={control}
+            render={({ field: { onChange, value } }) => (
+              <input
+                type="text"
+                placeholder="Enter username"
+                onChange={onChange}
+                value={value}
+                className="w-full bg-white p-4 text-sm border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              />
+            )}
+            name="userName"
+          />
+        </div>
+        <div className="relative mt-4">
+          <Controller
+            control={control}
             rules={{
               required: messages.VALIDATIONS.INVALID_EMAIL_ADDRESS,
               pattern: {
@@ -99,7 +118,7 @@ const Signup = () => {
                 className="w-full bg-white p-4 text-sm border border-gray-300 rounded-lg shadow-sm outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
               />
             )}
-            name="name"
+            name="fullName"
           />
         </div>
         <div className="relative mt-4">

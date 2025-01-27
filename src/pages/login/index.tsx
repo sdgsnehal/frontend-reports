@@ -21,7 +21,8 @@ const getDefaultValues = () => {
 };
 const Login = () => {
   const navigate = useNavigate();
-  const loginMutation = useLogin()
+  const loginMutation = useLogin();
+  console.log(loginMutation);
   const {
     handleSubmit,
     control,

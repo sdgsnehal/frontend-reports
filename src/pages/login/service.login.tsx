@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import API from "../../lib/api-client";
 import secureLocalStorage from "react-secure-storage";
+import toast from "react-hot-toast";
 type Login = {
   email: string;
   password: string;
@@ -25,6 +26,9 @@ export function useLogin() {
       queryClient.setQueryData(["auth"], user);
       secureLocalStorage.setItem("user", user);
       navigate("/dashboard");
+    },
+    onError: () => {
+      toast.error("This didn't work.");
     },
   });
 }
