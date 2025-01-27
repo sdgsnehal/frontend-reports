@@ -8,9 +8,9 @@ const axios = Axios.create({
 
 // A function that calls '/api/csrf-cookie' to set the CSRF cookies. The
 // default is 'sanctum/csrf-cookie' but you can configure it to be anything.
-const setCSRFToken = () => {
-  return axios.get("/api/csrf-cookie");
-};
+// const setCSRFToken = () => {
+//   return axios.get("/api/csrf-cookie");
+// };
 
 axios.interceptors.request.use((config) => {
   // If http method is `post | put | delete` and XSRF-TOKEN cookie is
@@ -21,7 +21,7 @@ axios.interceptors.request.use((config) => {
     config.method === "put" ||
     config.method === "delete"
   ) {
-    return setCSRFToken().then(() => config);
+    return config;
   }
 
   return config;
