@@ -14,34 +14,22 @@ import { RootState } from "../../../store/store";
 import { useDispatch } from "react-redux";
 import { DashboardData } from "../../../store/getDashboardSlice";
 
-type MyModalProps = {
-  onDataFetched: (data: any) => void;
-};
-
-export default function MyModal({ onDataFetched }: MyModalProps) {
+export default function MyModal() {
   const dispatch = useDispatch();
+  const dashboardData = useSelector((state: RootState) => state.dashboardData);
+
   const merchantId = useSelector((state: RootState) => state.merchant.id);
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const { data, isSuccess } = useSalesDashboard({
+  const { data, isSuccess, refetch, isFetched } = useSalesDashboard({
     startDate: startDate?.toISOString() ?? "",
     endDate: endDate?.toISOString() ?? "",
     merchantId,
   });
-  if (isSuccess) {
-    dispatch(DashboardData(data));
+  if (data && JSON.stringify(data) !== JSON.stringify(dashboardData)) {
+    dispatch(DashboardData(data)); // Dispatch only if different
   }
-  //console.log(data);
-  function apply() {
-    if (startDate && endDate && isSuccess) {
-      dispatch(DashboardData(data));
-      close();
-    } else {
-      console.error("Please select valid start and end dates");
-    }
-  }
-
   function open() {
     setIsOpen(true);
   }
@@ -106,7 +94,10 @@ export default function MyModal({ onDataFetched }: MyModalProps) {
               <div className="mt-4">
                 <Button
                   className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
-                  onClick={apply}
+                  onClick={() => {
+                    refetch();
+                    close();
+                  }}
                 >
                   Apply
                 </Button>

@@ -1,26 +1,16 @@
-import { useState } from "react";
 import { Linechart } from "../../components/charts/Linecharts/Linechart";
-import { InformationCircleIcon } from "@heroicons/react/16/solid";
 import DashboardDropdown from "../../components/Dropdown/Dashboard/DashboardDropdown";
 import TransposedTable from "../../components/Table/Table";
 import { data12, data6 } from "../../utils/Constants";
 import Layout from "../Layout/Layout";
 import Dailysummary from "../../components/Table/DailySummary/Dailysummary";
 import CheckboxComponent from "../../components/checkbox/Checkbox";
-import Tooltip from "../../components/Tooltip";
 import CardComponent from "../../components/card";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
-interface DashboardData {
-  totalSales: number;
-  totalProfit: number;
-  totalOrder: number;
-  averageOrderValue: number;
-}
-
 interface ChartheadingProps {
   ChartName: string;
-  Value: number;
+  Value: string | number;
 }
 
 const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
@@ -32,47 +22,34 @@ const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
 };
 
 const Dashboard = () => {
-  //const data = useSelector((state: RootState) => state.dashboardData);
-  const [dashboardData, setDashboardData] = useState<DashboardData>(null);
-  const handleFetchedData = (data: any) => {
-    console.log("Fetched data from modal:", data);
-    setDashboardData(data); // Store the data or trigger further actions
-  };
+  const data = useSelector((state: RootState) => state.dashboardData);
 
-  console.log(data);
   return (
     <Layout>
       <div className="w-full  h-full overflow-x-hidden p-4 mx-auto">
         <div className="pb-4">
-          <DashboardDropdown onDataFetched={handleFetchedData} />
+          <DashboardDropdown />
         </div>
-
         <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 mx-auto">
           <div className="chart-container">
             <Chartheading
               ChartName="Total Sales"
-              Value={dashboardData?.totalSales}
+              Value={data?.data?.totalSales}
             />
             <Linechart title="Total Sales" />
           </div>
           <div className="chart-container ">
-            <Chartheading
-              ChartName="Total Profit"
-              Value={dashboardData?.totalSales}
-            />
+            <Chartheading ChartName="Total Profit" Value={25} />
             <Linechart title="Total Profit" />
           </div>
           <div className="chart-container ">
-            <Chartheading
-              ChartName="Total Order"
-              Value={dashboardData?.quantity}
-            />
+            <Chartheading ChartName="Total Order" Value={data.data.quantity} />
             <Linechart title="Total Order" />
           </div>
           <div className="chart-container ">
             <Chartheading
               ChartName="Average Order"
-              Value={dashboardData?.totalAvgOrderValue}
+              Value={data?.data?.totalAvgOrderValue.toFixed(2)}
             />
             <Linechart title="Average Order Value" />
           </div>

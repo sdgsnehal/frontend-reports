@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import API from "../../lib/api-client";
+import { fa } from "@faker-js/faker";
 
 type SalesDashboardParams = {
   startDate: string;
@@ -20,6 +21,6 @@ export function useSalesDashboard({
       });
       return response.data;
     },
-    enabled: !!startDate && !!endDate && !!merchantId,
+    enabled: false,
   });
 }

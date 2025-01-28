@@ -22,7 +22,6 @@ export const dashboardDataSlice = createSlice({
   initialState,
   reducers: {
     DashboardData: (state, action: PayloadAction<ApiResponse>) => {
-      console.log(action.payload);
       return { ...state, ...action.payload };
     },
   },

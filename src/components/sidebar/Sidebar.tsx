@@ -13,16 +13,14 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
-  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+
   const location = useLocation();
   const dispatch = useDispatch();
-  const handleMenuClick = (menuName: string) => {
-    setActiveMenu(menuName);
-  };
+ 
   const handleDropdownChange = (selectedItem: { id: number; name: string }) => {
     dispatch(selectMerchant(selectedItem));
   };
-  const merchant = useSelector((state: RootState) => state.merchant);
+  
 
   return (
     <nav
@@ -56,7 +54,6 @@ const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
             return (
               <li
                 key={index}
-                onClick={() => handleMenuClick(menu.name)}
                 className={`text-sm font-medium flex items-center gap-2 px-4 py-2 cursor-pointer ${
                   isActive
                     ? "bg-[#56595c] text-white"
