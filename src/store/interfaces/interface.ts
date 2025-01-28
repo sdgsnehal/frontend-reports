@@ -3,7 +3,7 @@ interface DailyOrders {
   totalOrders: number;
 }
 
-interface DailySales {
+ export interface DailySales {
   _id: string;
   dailySales: number;
 }

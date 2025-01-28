@@ -22,11 +22,14 @@ export default function MyModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const { data, isSuccess, refetch, isFetched } = useSalesDashboard({
+  const { data, isSuccess, refetch, isFetched, isLoading } = useSalesDashboard({
     startDate: startDate?.toISOString() ?? "",
     endDate: endDate?.toISOString() ?? "",
     merchantId,
   });
+  if (isLoading) {
+    return <div>Loading..</div>;
+  }
   if (data && JSON.stringify(data) !== JSON.stringify(dashboardData)) {
     dispatch(DashboardData(data)); // Dispatch only if different
   }

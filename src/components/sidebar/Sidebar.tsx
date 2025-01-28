@@ -1,11 +1,9 @@
-import { useState } from "react";
 import Logo from "../../assets/react.svg";
 import { MenuList } from "../../utils/Menulist";
 import Dropdown from "../Dropdown/Dropdown";
 import { MerchantList } from "../../utils/Constants";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { selectMerchant } from "../../store/selectMerchantSlice";
-import { RootState } from "../../store/store";
 import { useLocation, Link } from "react-router-dom";
 
 interface SidebarProps {
@@ -13,14 +11,15 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
-
   const location = useLocation();
   const dispatch = useDispatch();
- 
-  const handleDropdownChange = (selectedItem: { id: number; name: string }) => {
+
+  const handleDropdownChange = (selectedItem: {
+    id: string | number;
+    name: string;
+  }) => {
     dispatch(selectMerchant(selectedItem));
   };
-  
 
   return (
     <nav

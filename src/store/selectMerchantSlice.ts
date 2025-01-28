@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
 export interface MerchantState {
-  id: string;
+  id: string | number;
   name: string;
 }
 const initialState: MerchantState = {

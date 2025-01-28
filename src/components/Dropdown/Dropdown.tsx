@@ -9,9 +9,9 @@ import clsx from "clsx";
 import { useState } from "react";
 
 interface DropdownProps {
-  Items: { id: number; name: string }[];
+  Items: { id: number | number; name: string }[];
   Light?: boolean;
-  onChange: (selectedItem: { id: number; name: string }) => void;
+  onChange: (selectedItem: { id: number | string; name: string }) => void;
 }
 
 export default function Dropdown({ Items, Light, onChange }: DropdownProps) {

@@ -36,7 +36,7 @@ const Dashboard = () => {
               ChartName="Total Sales"
               Value={data?.data?.totalSales}
             />
-            <Linechart title="Total Sales" />
+            <Linechart title="Total Sales" chartData={data?.data?.dailySales} />
           </div>
           <div className="chart-container ">
             <Chartheading ChartName="Total Profit" Value={25} />
