@@ -20,6 +20,6 @@ export function useSalesDashboard({
       });
       return response.data;
     },
-    enabled: !!startDate && !!endDate && !!merchantId, // Prevents API calls if params are missing
+    enabled: !!startDate && !!endDate && !!merchantId,
   });
 }

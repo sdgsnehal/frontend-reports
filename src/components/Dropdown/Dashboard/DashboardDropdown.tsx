@@ -11,24 +11,31 @@ import {
 } from "@heroicons/react/20/solid";
 import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
+import { useDispatch } from "react-redux";
+import { DashboardData } from "../../../store/getDashboardSlice";
 
 type MyModalProps = {
   onDataFetched: (data: any) => void;
 };
 
 export default function MyModal({ onDataFetched }: MyModalProps) {
+  const dispatch = useDispatch();
   const merchantId = useSelector((state: RootState) => state.merchant.id);
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const { data } = useSalesDashboard({
+  const { data, isSuccess } = useSalesDashboard({
     startDate: startDate?.toISOString() ?? "",
     endDate: endDate?.toISOString() ?? "",
     merchantId,
   });
-  console.log(data);
+  if (isSuccess) {
+    dispatch(DashboardData(data));
+  }
+  //console.log(data);
   function apply() {
-    if (startDate && endDate) {
+    if (startDate && endDate && isSuccess) {
+      dispatch(DashboardData(data));
       close();
     } else {
       console.error("Please select valid start and end dates");
@@ -83,7 +90,7 @@ export default function MyModal({ onDataFetched }: MyModalProps) {
                 <div>
                   <p className="text-sm font-medium">Ending</p>
                   <DatePicker
-                    selected={startDate}
+                    selected={endDate}
                     onChange={(date) => setEndDate(date)}
                     className="p-[5px] rounded-md"
                   />

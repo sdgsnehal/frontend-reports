@@ -9,6 +9,8 @@ import Dailysummary from "../../components/Table/DailySummary/Dailysummary";
 import CheckboxComponent from "../../components/checkbox/Checkbox";
 import Tooltip from "../../components/Tooltip";
 import CardComponent from "../../components/card";
+import { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
 interface DashboardData {
   totalSales: number;
   totalProfit: number;
@@ -30,12 +32,14 @@ const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
 };
 
 const Dashboard = () => {
+  //const data = useSelector((state: RootState) => state.dashboardData);
   const [dashboardData, setDashboardData] = useState<DashboardData>(null);
   const handleFetchedData = (data: any) => {
     console.log("Fetched data from modal:", data);
     setDashboardData(data); // Store the data or trigger further actions
   };
-  console.log(dashboardData);
+
+  console.log(data);
   return (
     <Layout>
       <div className="w-full  h-full overflow-x-hidden p-4 mx-auto">
