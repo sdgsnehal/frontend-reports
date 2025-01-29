@@ -27,7 +27,7 @@ interface SalesData {
   dailyOrders: DailyOrders[];
   dailySales: DailySales[];
   dailyAvgOrderValue: DailyAvgOrderValue[];
-  last7DaysSummary: any[]; // Assuming it's an empty array, you can specify a type if needed
+  last7DaysSummary: []; // Assuming it's an empty array, you can specify a type if needed
   last6MonthsSummary: MonthlySummary[];
 }
 
