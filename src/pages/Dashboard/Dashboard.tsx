@@ -8,6 +8,8 @@ import CheckboxComponent from "../../components/checkbox/Checkbox";
 import CardComponent from "../../components/card";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
+import { useLoading } from "../../components/loader/loadingContext";
+import Loader from "../../components/loader/loader";
 interface ChartheadingProps {
   ChartName: string;
   Value: string | number;
@@ -23,7 +25,7 @@ const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
 
 const Dashboard = () => {
   const data = useSelector((state: RootState) => state.dashboardData);
-
+  const { loading } = useLoading();
   return (
     <Layout>
       <div className="w-full  h-full overflow-x-hidden p-4 mx-auto">
@@ -44,14 +46,20 @@ const Dashboard = () => {
           </div>
           <div className="chart-container ">
             <Chartheading ChartName="Total Order" Value={data.data.quantity} />
-            <Linechart title="Total Order" chartData={data?.data?.dailyOrders}/>
+            <Linechart
+              title="Total Order"
+              chartData={data?.data?.dailyOrders}
+            />
           </div>
           <div className="chart-container ">
             <Chartheading
               ChartName="Average Order"
               Value={data?.data?.totalAvgOrderValue.toFixed(2)}
             />
-            <Linechart title="Average Order Value" chartData={data?.data?.dailyAvgOrderValue}/>
+            <Linechart
+              title="Average Order Value"
+              chartData={data?.data?.dailyAvgOrderValue}
+            />
           </div>
         </div>
         <div className="mt-6  bg-white/50 border-1 border-gray-500 rounded-xl flex items-center justify-center flex-col">
@@ -86,6 +94,11 @@ const Dashboard = () => {
           <CardComponent />
         </div>
       </div>
+      {loading && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+          <Loader />
+        </div>
+      )}
     </Layout>
   );
 };

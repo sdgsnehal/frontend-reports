@@ -14,9 +14,11 @@ import { RootState } from "../../../store/store";
 import { useDispatch } from "react-redux";
 import { DashboardData } from "../../../store/getDashboardSlice";
 import { getDateRange } from "../../../utils/dateUtils";
+import { useLoading } from "../../loader/loadingContext";
 
 export default function MyModal() {
   const dispatch = useDispatch();
+  const { loading, setLoading } = useLoading();
   const dashboardData = useSelector((state: RootState) => state.dashboardData);
   const [enableDatepicker, setEnableDatePicker] = useState<boolean>(true);
   const merchantId = useSelector((state: RootState) => state.merchant.id);
@@ -30,10 +32,11 @@ export default function MyModal() {
     merchantId,
   });
   if (isLoading) {
-    return <div>Loading..</div>;
+    setLoading(isLoading);
   }
   if (data && JSON.stringify(data) !== JSON.stringify(dashboardData)) {
     dispatch(DashboardData(data));
+    setLoading(false);
   }
   function open() {
     setIsOpen(true);

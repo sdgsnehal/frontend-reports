@@ -1,10 +1,10 @@
 import { createContext, ReactNode, useContext, useState } from "react";
 const LoadingContext = createContext<{
   loading: boolean;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>> | null;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 }>({
   loading: false,
-  setLoading: null,
+  setLoading: () => {},
 });
 interface LoadingProviderProps {
   children: ReactNode;
