@@ -7,10 +7,12 @@ import {
   Title,
   Tooltip,
   Legend,
+  ChartData,
+  ChartOptions,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 
-import { DailySales } from "../../../store/interfaces/interface";
+import { DailySales, DailyOrders } from "../../../store/interfaces/interface";
 type LegendPosition =
   | "top"
   | "left"
@@ -21,7 +23,7 @@ type LegendPosition =
 interface LinechartProps {
   title: string;
   legend?: LegendPosition;
-  chartData: DailySales[];
+  chartData: DailySales[] | DailyOrders[];
 }
 
 ChartJS.register(
@@ -33,15 +35,25 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-
+const getSalesData = (
+  data: DailySales[] | DailyOrders[],
+  dailySales: keyof DailySales | keyof DailyOrders,
+  dailyOrders: keyof DailyOrders | keyof DailySales
+): number[] => {
+  const salesData = data?.map((item) => {
+    const salesValue = item?.[dailySales] || item?.[dailyOrders];
+    return salesValue;
+  });
+  return salesData;
+};
 export function Linechart({
   title,
   legend = "top",
   chartData,
 }: LinechartProps) {
   const labels = chartData?.map((item) => item._id);
-  const dailySalesData = chartData?.map((item) => item.dailySales);
-  const options = {
+  const dailySalesData = getSalesData(chartData, "dailySales", "totalOrders");
+  const options:ChartOptions = {
     responsive: true,
     plugins: {
       legend: {
@@ -53,7 +65,7 @@ export function Linechart({
       },
     },
   };
-  const data = {
+  const data: ChartData = {
     labels,
     datasets: [
       {

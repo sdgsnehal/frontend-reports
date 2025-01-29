@@ -1,4 +1,4 @@
-interface DailyOrders {
+export interface DailyOrders {
   _id: string;
   totalOrders: number;
 }

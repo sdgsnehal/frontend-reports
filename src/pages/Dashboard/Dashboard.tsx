@@ -44,7 +44,7 @@ const Dashboard = () => {
           </div>
           <div className="chart-container ">
             <Chartheading ChartName="Total Order" Value={data.data.quantity} />
-            <Linechart title="Total Order" />
+            <Linechart title="Total Order" chartData={data?.data?.dailyOrders}/>
           </div>
           <div className="chart-container ">
             <Chartheading
