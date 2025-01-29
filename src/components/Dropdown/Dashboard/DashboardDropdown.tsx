@@ -57,7 +57,7 @@ export default function MyModal() {
     setEndDate(endDate ? new Date(endDate) : null);
   };
   const CheckboxChange = (enable: boolean) => {
-    setEnableCheckbox(enable);
+    setEnableCheckbox(true);
   };
   return (
     <>
