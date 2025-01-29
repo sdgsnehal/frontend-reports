@@ -8,7 +8,7 @@ export interface DailyOrders {
   dailySales: number;
 }
 
-interface DailyAvgOrderValue {
+export interface DailyAvgOrderValue {
   date: string;
   dailyAvgOrderValue: number;
 }

@@ -51,7 +51,7 @@ const Dashboard = () => {
               ChartName="Average Order"
               Value={data?.data?.totalAvgOrderValue.toFixed(2)}
             />
-            <Linechart title="Average Order Value" />
+            <Linechart title="Average Order Value" chartData={data?.data?.dailyAvgOrderValue}/>
           </div>
         </div>
         <div className="mt-6  bg-white/50 border-1 border-gray-500 rounded-xl flex items-center justify-center flex-col">
