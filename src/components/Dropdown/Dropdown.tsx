@@ -12,9 +12,15 @@ interface DropdownProps {
   Items: { id: number | number; name: string }[];
   Light?: boolean;
   onChange: (selectedItem: { id: number | string; name: string }) => void;
+  disabled?: boolean;
 }
 
-export default function Dropdown({ Items, Light, onChange }: DropdownProps) {
+export default function Dropdown({
+  Items,
+  Light,
+  onChange,
+  disabled = false,
+}: DropdownProps) {
   const [selected, setSelected] = useState(Items[0]);
   const handleSelection = (item: { id: number; name: string }) => {
     setSelected(item);
@@ -23,7 +29,7 @@ export default function Dropdown({ Items, Light, onChange }: DropdownProps) {
 
   return (
     <div className=" w-52 ">
-      <Listbox value={selected} onChange={handleSelection}>
+      <Listbox value={selected} onChange={handleSelection} disabled={disabled}>
         {/* Button to toggle dropdown */}
         <ListboxButton
           className={clsx(

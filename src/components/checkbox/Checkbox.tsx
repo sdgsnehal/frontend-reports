@@ -1,14 +1,14 @@
 import { Checkbox } from "@headlessui/react";
 import { CheckIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
-
-export default function CheckboxComponent() {
+interface CheckboxProps {
+  onChange: (enable: boolean) => void;
+}
+export default function CheckboxComponent({ onChange }: CheckboxProps) {
   const [enabled, setEnabled] = useState(true);
-
   const handleChange = (value: boolean) => {
-    // Process the change (e.g., log it, trigger some action, etc.)
-    console.log("Checkbox state changed:", value);
-    setEnabled(value); // Update state
+    setEnabled(value); 
+    onChange(value);
   };
 
   return (

@@ -23,7 +23,8 @@ export default function MyModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
-  const { data, isSuccess, refetch, isFetched, isLoading } = useSalesDashboard({
+  const [enableCheckbox, setEnableCheckbox] = useState<boolean>(true);
+  const { data, refetch, isLoading } = useSalesDashboard({
     startDate: startDate?.toISOString() ?? "",
     endDate: endDate?.toISOString() ?? "",
     merchantId,
@@ -32,7 +33,7 @@ export default function MyModal() {
     return <div>Loading..</div>;
   }
   if (data && JSON.stringify(data) !== JSON.stringify(dashboardData)) {
-    dispatch(DashboardData(data)); // Dispatch only if different
+    dispatch(DashboardData(data));
   }
   function open() {
     setIsOpen(true);
@@ -51,6 +52,9 @@ export default function MyModal() {
     const { startDate, endDate } = getDateRange(selectedItem.name);
     setStartDate(startDate ? new Date(startDate) : null);
     setEndDate(endDate ? new Date(endDate) : null);
+  };
+  const CheckboxChange = (enable: boolean) => {
+    setEnableCheckbox(enable);
   };
   return (
     <>
@@ -107,10 +111,8 @@ export default function MyModal() {
                 </div>
               </div>
               <div className="flex p-2 gap-2">
-                <CheckboxComponent />
-                <p className="text-sm font-medium">
-                  Compare to Previous Date
-                </p>
+                <CheckboxComponent onChange={CheckboxChange} />
+                <p className="text-sm font-medium">Compare to Previous Date</p>
               </div>
               <div className="p-2">
                 <p className="text-sm font-medium">Compare to</p>
@@ -118,12 +120,13 @@ export default function MyModal() {
                   Light={true}
                   Items={CompareDateRange}
                   onChange={handleDropdownChange}
+                  disabled={!enableCheckbox}
                 />
               </div>
 
-              <div className="mt-4">
+              <div className="mt-4 flex justify-center">
                 <Button
-                  className="inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
+                  className="w-52 inline-flex items-center justify-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700"
                   onClick={() => {
                     refetch();
                     close();
