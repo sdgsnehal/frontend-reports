@@ -1,7 +1,7 @@
 import { Button, Dialog, DialogPanel } from "@headlessui/react";
 import { useState } from "react";
 import Dropdown from "../Dropdown";
-import { DateRange } from "../../../utils/Constants";
+import { DateRange, CompareDateRange } from "../../../utils/Constants";
 import DatePicker from "react-datepicker";
 import CheckboxComponent from "../../checkbox/Checkbox";
 import { useSalesDashboard } from "../../../pages/Dashboard/service.dashboard";
@@ -13,11 +13,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { useDispatch } from "react-redux";
 import { DashboardData } from "../../../store/getDashboardSlice";
+import { getDateRange } from "../../../utils/dateUtils";
 
 export default function MyModal() {
   const dispatch = useDispatch();
   const dashboardData = useSelector((state: RootState) => state.dashboardData);
-
+  const [enableDatepicker, setEnableDatePicker] = useState<boolean>(true);
   const merchantId = useSelector((state: RootState) => state.merchant.id);
   const [isOpen, setIsOpen] = useState(false);
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -40,7 +41,17 @@ export default function MyModal() {
   function close() {
     setIsOpen(false);
   }
-
+  const handleDropdownChange = (selectedItem: {
+    id: number | string;
+    name: string;
+  }) => {
+    if (selectedItem.name === "Custom") {
+      setEnableDatePicker(true);
+    }
+    const { startDate, endDate } = getDateRange(selectedItem.name);
+    setStartDate(startDate ? new Date(startDate) : null);
+    setEndDate(endDate ? new Date(endDate) : null);
+  };
   return (
     <>
       <Button
@@ -66,7 +77,11 @@ export default function MyModal() {
             >
               <div className="p-2">
                 <p className="text-sm font-medium">Date Range</p>
-                <Dropdown Light={true} Items={DateRange} />
+                <Dropdown
+                  Light={true}
+                  Items={DateRange}
+                  onChange={handleDropdownChange}
+                />
               </div>
               <div className="flex gap-2 justify-evenly p-2">
                 <div>
@@ -75,6 +90,8 @@ export default function MyModal() {
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
                     className="p-[5px] rounded-md"
+                    showIcon
+                    disabled={enableDatepicker}
                   />
                 </div>
 
@@ -84,14 +101,24 @@ export default function MyModal() {
                     selected={endDate}
                     onChange={(date) => setEndDate(date)}
                     className="p-[5px] rounded-md"
+                    showIcon
+                    disabled={enableDatepicker}
                   />
                 </div>
               </div>
               <div className="flex p-2 gap-2">
                 <CheckboxComponent />
                 <p className="text-sm font-medium">
-                  Compare to previous Period
+                  Compare to Previous Date
                 </p>
+              </div>
+              <div className="p-2">
+                <p className="text-sm font-medium">Compare to</p>
+                <Dropdown
+                  Light={true}
+                  Items={CompareDateRange}
+                  onChange={handleDropdownChange}
+                />
               </div>
 
               <div className="mt-4">

@@ -17,6 +17,10 @@ export const DateRange = [
   { id: 16, name: "1st Quarter" },
   { id: 17, name: "Custom" },
 ];
+export const CompareDateRange = [
+  { id: 1, name: "Previous Period" },
+  { id: 2, name: "Previous Year" },
+];
 export const data12 = [
   {
     month: "August/2024",

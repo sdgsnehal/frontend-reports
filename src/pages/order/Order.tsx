@@ -11,7 +11,7 @@ const Order = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [enableDateicker, setEnableDatePicker] = useState<boolean>(true);
-  const handleDropdownChange = (selectedItem: { id: number; name: string }) => {
+  const handleDropdownChange = (selectedItem: { id: number | string; name: string }) => {
     if (selectedItem.name === "Custom") {
       setEnableDatePicker(false);
     }
