@@ -50,7 +50,7 @@ export default function MyModal() {
     name: string;
   }) => {
     if (selectedItem.name === "Custom") {
-      setEnableDatePicker(true);
+      setEnableDatePicker(false);
     }
     const { startDate, endDate } = getDateRange(selectedItem.name);
     setStartDate(startDate ? new Date(startDate) : null);
@@ -63,7 +63,7 @@ export default function MyModal() {
     <>
       <Button
         onClick={open}
-        className="rounded-md bg-white flex flex-row gap-1 items-center py-2 px-4 text-sm font-medium text-black  focus:outline-none data-[hover]:bg-black/30 data-[focus]:outline-1 data-[focus]:outline-white"
+        className="rounded-md bg-white flex flex-row gap-1 items-center py-2 px-4 text-sm font-medium text-black  focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
       >
         <CalendarDateRangeIcon className="w-6 h-6" />
         Select Date Range
