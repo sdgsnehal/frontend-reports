@@ -1,4 +1,4 @@
-import Logo from "../../assets/react.svg";
+import Logo from "../../assets/logo-removebg-preview.png";
 import { MenuList } from "../../utils/Menulist";
 import Dropdown from "../Dropdown/Dropdown";
 import { MerchantList } from "../../utils/Constants";
@@ -29,23 +29,21 @@ const Sidebar = ({ isSidebarOpen }: SidebarProps) => {
           : "-translate-x-full md:translate-x-0"
       }`}
     >
-      {/* Logo Section */}
+
       <div className="flex items-center justify-center py-4">
         <img
           src={Logo}
           alt="logo"
-          width={100}
-          height={100}
-          className="py-2 px-2"
+          width={150}
+          height={150}
+          className="py-4 px-2"
         />
       </div>
 
-      {/* Dropdown Example */}
       <div className="px-4">
         <Dropdown Items={MerchantList} onChange={handleDropdownChange} />
       </div>
 
-      {/* Menu List */}
       <div className="mt-4">
         <ul>
           {MenuList.map((menu, index) => {
