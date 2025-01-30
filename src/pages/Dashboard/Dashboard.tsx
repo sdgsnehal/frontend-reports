@@ -4,16 +4,19 @@ import TransposedTable from "../../components/Table/Table";
 import { data12, data6 } from "../../utils/Constants";
 import Layout from "../Layout/Layout";
 import Dailysummary from "../../components/Table/DailySummary/Dailysummary";
-import CheckboxComponent from "../../components/checkbox/Checkbox";
 import CardComponent from "../../components/card";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 import { useLoading } from "../../components/loader/loadingContext";
 import Loader from "../../components/loader/loader";
+import { useForm, Controller } from "react-hook-form";
 interface ChartheadingProps {
   ChartName: string;
   Value: string | number;
 }
+type FormValues = {
+  selectedOption: string;
+};
 
 const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
   return (
@@ -26,6 +29,12 @@ const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
 const Dashboard = () => {
   const data = useSelector((state: RootState) => state.dashboardData);
   const { loading } = useLoading();
+  const { control, setValue } = useForm<FormValues>({
+    defaultValues: {
+      selectedOption: "",
+    },
+  });
+
   return (
     <Layout>
       <div className="w-full  h-full overflow-x-hidden p-4 mx-auto">
@@ -73,17 +82,26 @@ const Dashboard = () => {
         <div className="flex items-center text-sm text-black font-medium">
           <p>Total Inventory turnout if sold at current | </p>
           <p> Full filled By:</p>
-          <div className="flex p-2 gap-2">
-            <CheckboxComponent />
-            <p className="text-sm font-medium">ALL</p>
-          </div>
-          <div className="flex p-2 gap-2">
-            <CheckboxComponent />
-            <p className="text-sm font-medium">AFN</p>
-          </div>
-          <div className="flex p-2 gap-2">
-            <CheckboxComponent />
-            <p className="text-sm font-medium">MFN</p>
+          <div className="flex flex-row gap-2">
+            {["ALL", "AFN", "MFN"].map((option) => (
+              <label
+                key={option}
+                className="flex items-center gap-2 text-sm font-medium"
+              >
+                <Controller
+                  name="selectedOption"
+                  control={control}
+                  render={({ field }) => (
+                    <input
+                      type="radio"
+                      checked={field.value === option}
+                      onChange={() => setValue("selectedOption", option)}
+                    />
+                  )}
+                />
+                {option}
+              </label>
+            ))}
           </div>
         </div>
         <div className="flex flex-col md:flex-row gap-4 justify-center items-center mt-2">
