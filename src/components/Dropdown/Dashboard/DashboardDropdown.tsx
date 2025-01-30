@@ -13,12 +13,12 @@ import { useSelector } from "react-redux";
 import { RootState } from "../../../store/store";
 import { useDispatch } from "react-redux";
 import { DashboardData } from "../../../store/getDashboardSlice";
-import { getDateRange } from "../../../utils/dateUtils";
+import { getDateRange, getPreviousDateRange } from "../../../utils/dateUtils";
 import { useLoading } from "../../loader/loadingContext";
 
 export default function MyModal() {
   const dispatch = useDispatch();
-  const { loading, setLoading } = useLoading();
+  const { setLoading } = useLoading();
   const dashboardData = useSelector((state: RootState) => state.dashboardData);
   const [enableDatepicker, setEnableDatePicker] = useState<boolean>(true);
   const merchantId = useSelector((state: RootState) => state.merchant.id);
@@ -26,6 +26,13 @@ export default function MyModal() {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
   const [endDate, setEndDate] = useState<Date | null>(new Date());
   const [enableCheckbox, setEnableCheckbox] = useState<boolean>(true);
+  const [previousDateRange, setPreviousDateRange] = useState<{
+    startDate: string | null;
+    endDate: string | null;
+  }>({
+    startDate: null,
+    endDate: null,
+  });
   const { data, refetch, isLoading } = useSalesDashboard({
     startDate: startDate?.toISOString() ?? "",
     endDate: endDate?.toISOString() ?? "",
@@ -53,22 +60,35 @@ export default function MyModal() {
       setEnableDatePicker(false);
     }
     const { startDate, endDate } = getDateRange(selectedItem.name);
+    if (enableCheckbox) {
+      const prevRange = getPreviousDateRange(
+        startDate,
+        endDate,
+        "previous_period"
+      );
+      setPreviousDateRange(prevRange);
+    }
     setStartDate(startDate ? new Date(startDate) : null);
     setEndDate(endDate ? new Date(endDate) : null);
   };
   const CheckboxChange = (enable: boolean) => {
-    setEnableCheckbox(true);
+    setEnableCheckbox(enable);
   };
   return (
     <>
-      <Button
-        onClick={open}
-        className="rounded-md bg-white flex flex-row gap-1 items-center py-2 px-4 text-sm font-medium text-black  focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
-      >
-        <CalendarDateRangeIcon className="w-6 h-6" />
-        Select Date Range
-        <ChevronDownIcon className="w-6 h-6" />
-      </Button>
+      <div className="flex flex-row gap-2">
+        <Button
+          onClick={open}
+          className="rounded-md bg-white flex flex-row gap-1 items-center py-2 px-4 text-sm font-medium text-black  focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white"
+        >
+          <CalendarDateRangeIcon className="w-6 h-6" />
+          Select Date Range
+          <ChevronDownIcon className="w-6 h-6" />
+        </Button>
+        <div className="rounded-md min-w-max bg-white flex flex-row gap-1 items-center py-2 px-4 text-sm font-medium text-black  focus:outline-none  data-[focus]:outline-1 data-[focus]:outline-white">
+          compare to {previousDateRange.startDate} - {previousDateRange.endDate}
+        </div>
+      </div>
 
       <Dialog
         open={isOpen}

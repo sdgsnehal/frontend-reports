@@ -98,3 +98,46 @@ export const getDateRange = (selectedRange: string) => {
     endDate: endDate ? endDate.format("YYYY-MM-DD") : null,
   };
 };
+export function getPreviousDateRange(
+  startDate: string | null,
+  endDate: string | null,
+  periodType: "previous_period" | "previous_year"
+): { startDate: string | null; endDate: string | null } {
+  if (!startDate || !endDate) {
+    throw new Error(
+      "Invalid date input. startDate and endDate must be valid date strings."
+    );
+  }
+
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    throw new Error(
+      "Invalid date format. Ensure the provided dates are valid."
+    );
+  }
+
+  let prevStart: Date, prevEnd: Date;
+
+  if (periodType === "previous_period") {
+    const diff = end.getTime() - start.getTime(); // Difference in milliseconds
+    prevEnd = new Date(start.getTime() - 1);
+    prevStart = new Date(prevEnd.getTime() - diff);
+  } else if (periodType === "previous_year") {
+    prevStart = new Date(start);
+    prevEnd = new Date(end);
+
+    prevStart.setFullYear(start.getFullYear() - 1);
+    prevEnd.setFullYear(end.getFullYear() - 1);
+  } else {
+    throw new Error(
+      "Invalid period type. Use 'previous_period' or 'previous_year'"
+    );
+  }
+
+  return {
+    startDate: prevStart.toISOString().split("T")[0],
+    endDate: prevEnd.toISOString().split("T")[0],
+  };
+}
