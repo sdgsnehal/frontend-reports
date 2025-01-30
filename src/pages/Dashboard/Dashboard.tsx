@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import { useLoading } from "../../components/loader/loadingContext";
 import Loader from "../../components/loader/loader";
 import { useForm, Controller } from "react-hook-form";
+import { ArrowPathRoundedSquareIcon } from "@heroicons/react/16/solid";
 interface ChartheadingProps {
   ChartName: string;
   Value: string | number;
@@ -38,8 +39,11 @@ const Dashboard = () => {
   return (
     <Layout>
       <div className="w-full  h-full overflow-x-hidden p-4 mx-auto">
-        <div className="pb-4">
+        <div className="pb-4 flex items-center justify-between">
           <DashboardDropdown />
+          <span className="bg-blue-400 p-2 text-black flex items-center justify-center gap-1 cursor-pointer rounded-full hover:cursor-pointer">
+            <ArrowPathRoundedSquareIcon className="w-4 h-4" />
+          </span>
         </div>
         <div className="w-full grid gap-4 grid-cols-1 md:grid-cols-2 mx-auto">
           <div className="chart-container">

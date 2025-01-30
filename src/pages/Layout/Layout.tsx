@@ -1,14 +1,20 @@
 import { ReactNode, useState } from "react";
 import Sidebar from "../../components/sidebar/Sidebar";
+import {
+  ArrowRightStartOnRectangleIcon,
+  QuestionMarkCircleIcon,
+} from "@heroicons/react/16/solid";
 import { IoMenu } from "react-icons/io5";
+import { useNavigate } from "react-router-dom";
 interface LayoutProps {
   children: ReactNode; // ReactNode allows passing any valid React child elements
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
+  const navigate = useNavigate();
   return (
-    <div className="w-full h-screen flex flex-col overflow-x-hidden">
+    <div className="w-full h-screen flex flex-col  overflow-x-hidden">
       <header className="w-full h-16  flex items-center justify-between px-4 text-black">
         <button
           className={`fixed top-4 transition-all duration-300 z-50 bg-gray-700 text-white p-2 rounded-md hover:bg-gray-600 ${
@@ -18,6 +24,20 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         >
           <IoMenu />
         </button>
+        <div className="w-full flex justify-end px-4 pt-6 gap-2">
+          <span className="flex items-center gap-2 bg-transparent text-black/70 text-sm hover:text-blue-400">
+            <QuestionMarkCircleIcon className="w-5 h-5" />
+          </span>
+          <span
+            className="flex items-center gap-2 bg-transparent text-black/70 text-sm hover:text-blue-400"
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
+            Logout
+          </span>
+        </div>
       </header>
 
       <div className="flex  w-full">
@@ -28,6 +48,9 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           }`}
         >
           {children}
+          <div className="text-xs text-gray-600">
+            <span className="font-semibold text-gray-600">Copyright</span> © 2025 Amzfein All rights reserved.
+          </div>
         </main>
       </div>
     </div>
