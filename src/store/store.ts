@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import merchantReducer from "../store/selectMerchantSlice";
 import dashboardDataSlice from "../store/getDashboardSlice";
+import globalDataSlice from "../store/getGlobalSlice";
 
 export const store = configureStore({
   reducer: {
     merchant: merchantReducer,
     dashboardData: dashboardDataSlice,
+    globalData: globalDataSlice,
   },
 });
 

@@ -3,7 +3,7 @@ export interface DailyOrders {
   totalOrders: number;
 }
 
- export interface DailySales {
+export interface DailySales {
   _id: string;
   dailySales: number;
 }
@@ -30,7 +30,12 @@ interface SalesData {
   last7DaysSummary: []; // Assuming it's an empty array, you can specify a type if needed
   last6MonthsSummary: MonthlySummary[];
 }
-
+export interface GlobalProps {
+  totalQuantity: string;
+  totalItemPrice: number;
+  merchantName: string;
+  merchantEmail: string;
+}
 export interface ApiResponse {
   statusCode: number;
   data: SalesData;

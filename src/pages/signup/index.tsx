@@ -17,7 +17,7 @@ const Signup = () => {
     formState: { errors },
   } = useForm<FormValues>({});
   const onSubmit = async (values: FormValues) => {
-    const { email, password, fullName, userName } = values;
+    const { email, password, fullName } = values;
     SignupMutation.mutate({ ...values, email: values.email.trim() });
     console.log(email, password, fullName);
   };

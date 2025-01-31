@@ -4,13 +4,48 @@ import Dropdown from "../../components/Dropdown/Dropdown";
 import { Linechart } from "../../components/charts/Linecharts/Linechart";
 import { data } from "../../components/Table/data";
 import { MerchantList } from "../../utils/Constants";
-const people = [
-  { id: 1, name: "Last 30 Days" },
-  { id: 2, name: "This Month" },
-  { id: 3, name: "Last Month" },
-];
+import { GlobalDateRange } from "../../utils/Constants";
+import { useEffect, useRef, useState } from "react";
+import { getDateRange } from "../../utils/dateUtils";
+import { useGlobal } from "./service.global";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { GlobalData } from "../../store/getGlobalSlice";
 
 const Global = () => {
+  const [startDate, setStartDate] = useState<Date | null>(new Date());
+  const [endDate, setEndDate] = useState<Date | null>(new Date());
+  const globalDataTable = useSelector((state: RootState) => state.globalData);
+  const lastGlobalDataRef = useRef(globalDataTable);
+  const dispatch = useDispatch();
+  const {
+    data: global,
+    refetch,
+    isLoading,
+  } = useGlobal({
+    startDate: startDate?.toISOString() ?? "",
+    endDate: endDate?.toISOString() ?? "",
+  });
+  useEffect(() => {
+    if (
+      global &&
+      JSON.stringify(global) !== JSON.stringify(lastGlobalDataRef.current)
+    ) {
+      dispatch(GlobalData(global));
+      lastGlobalDataRef.current = global;
+    }
+  }, [global, dispatch]);
+
+  const handleDropdownChange = (selectedItem: {
+    id: number | string;
+    name: string;
+  }) => {
+    const { startDate, endDate } = getDateRange(selectedItem.name);
+    setStartDate(startDate ? new Date(startDate) : null);
+    setEndDate(endDate ? new Date(endDate) : null);
+    refetch();
+  };
+
   return (
     <Layout>
       <div className="w-full bg-white/50  border-gray-500 rounded-xl flex flex-col p-1 mt-4">
@@ -19,10 +54,14 @@ const Global = () => {
             SELECT DATE RANGE
           </div>
           <div className="py-1 px-1">
-            <Dropdown Items={people} Light={true} />
+            <Dropdown
+              Items={GlobalDateRange}
+              Light={true}
+              onChange={handleDropdownChange}
+            />
           </div>
         </div>
-        <GlobalTable data={data} />
+        <GlobalTable data={globalDataTable} />
       </div>
       <div className="w-full bg-white/50  border-gray-500 rounded-xl flex flex-col p-1 mt-4">
         <div className="text-sm font-semibold py-2 px-7 ">

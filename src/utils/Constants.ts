@@ -140,3 +140,7 @@ export const MerchantList = [
   { id: "67950e64b58a31269ec47bdc", name: "Kavas" },
   { id: "2", name: "Usc" },
 ];
+export const GlobalDateRange = [
+  { id: 1, name: "Last 30 Days" },
+  { id: 3, name: "Last Month" },
+];

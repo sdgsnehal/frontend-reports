@@ -55,7 +55,7 @@ const Dashboard = () => {
           </div>
           <div className="chart-container ">
             <Chartheading ChartName="Total Profit" Value={25} />
-            <Linechart title="Total Profit" />
+            {/* <Linechart title="Total Profit" /> */}
           </div>
           <div className="chart-container ">
             <Chartheading ChartName="Total Order" Value={data.data.quantity} />
