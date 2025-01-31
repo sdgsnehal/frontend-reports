@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogPanel } from "@headlessui/react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Dropdown from "../Dropdown";
 import { DateRange, CompareDateRange } from "../../../utils/Constants";
 import DatePicker from "react-datepicker";
@@ -20,6 +20,7 @@ export default function MyModal() {
   const dispatch = useDispatch();
   const { setLoading } = useLoading();
   const dashboardData = useSelector((state: RootState) => state.dashboardData);
+  const lastGlobalDataRef = useRef(dashboardData);
   const [enableDatepicker, setEnableDatePicker] = useState<boolean>(true);
   const merchantId = useSelector((state: RootState) => state.merchant.id);
   const [isOpen, setIsOpen] = useState(false);
@@ -41,10 +42,16 @@ export default function MyModal() {
   if (isLoading) {
     setLoading(isLoading);
   }
-  if (data && JSON.stringify(data) !== JSON.stringify(dashboardData)) {
-    dispatch(DashboardData(data));
-    setLoading(false);
-  }
+
+  useEffect(() => {
+    if (
+      data &&
+      JSON.stringify(data) !== JSON.stringify(lastGlobalDataRef.current)
+    ) {
+      dispatch(DashboardData(data));
+      lastGlobalDataRef.current = data;
+    }
+  }, [data, dispatch]);
   function open() {
     setIsOpen(true);
   }
