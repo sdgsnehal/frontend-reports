@@ -1,10 +1,18 @@
 interface GlobalTableProps<T> {
   data: T[];
+  keysOrder?: string[];
 }
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const GlobalTable = <T extends Record<string, any>>({
   data,
+  keysOrder = [
+    "merchantName",
+    "merchantEmail",
+    "totalQuantity",
+    "totalItemPrice",
+  ],
 }: GlobalTableProps<T>) => {
+  const keys = keysOrder.length ? keysOrder : Object.keys(data[0]);
   if (!data || !data.length) {
     return <div className="p-4 text-gray-500">No data available</div>;
   }
@@ -13,7 +21,7 @@ const GlobalTable = <T extends Record<string, any>>({
       <table className="w-full text-xs border-[1px] border-[#E7E7E7] border-separate border-spacing-0">
         <thead className="sticky top-0 z-9">
           <tr className="bg-gray-100">
-            {Object.keys(data[0]).map((key) => (
+            {keys.map((key) => (
               <th
                 key={key}
                 className="border border-gray-300 px-4 py-2 bg-gray-200 text-left"
@@ -26,9 +34,9 @@ const GlobalTable = <T extends Record<string, any>>({
         <tbody>
           {data.map((row, rowIndex) => (
             <tr key={rowIndex}>
-              {Object.values(row).map((value, colIndex) => (
+              {keys.map((key, colIndex) => (
                 <td key={colIndex} className="p-2 border border-gray-200">
-                  {value}
+                  {row[key]}
                 </td>
               ))}
             </tr>
