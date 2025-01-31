@@ -50,7 +50,7 @@ const Global = () => {
     <Layout>
       <div className="w-full bg-white/50  border-gray-500 rounded-xl flex flex-col p-1 mt-4">
         <div className="px-4 py-2">
-          <div className="text-sm font-semibold py-2 px-4">
+          <div className="text-sm text-black font-semibold py-2 px-4">
             SELECT DATE RANGE
           </div>
           <div className="py-1 px-1">
@@ -64,7 +64,7 @@ const Global = () => {
         <GlobalTable data={globalDataTable} />
       </div>
       <div className="w-full bg-white/50  border-gray-500 rounded-xl flex flex-col p-1 mt-4">
-        <div className="text-sm font-semibold py-2 px-7 ">
+        <div className="text-sm text-black font-semibold py-2 px-7 ">
           SELECT AN ACCOUNT
         </div>
         <div className="py-1 px-5">

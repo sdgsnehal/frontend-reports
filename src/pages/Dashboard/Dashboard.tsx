@@ -21,7 +21,7 @@ type FormValues = {
 
 const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
   return (
-    <div className="flex flex-row gap-2 items-start justify-start font-semibold">
+    <div className="flex flex-row text-black gap-2 items-start justify-start font-semibold">
       <h3>{ChartName}</h3> <h3>{Value}</h3>
     </div>
   );
@@ -76,11 +76,11 @@ const Dashboard = () => {
           </div>
         </div>
         <div className="mt-6  bg-white/50 border-1 border-gray-500 rounded-xl flex items-center justify-center flex-col">
-          <div>Last 6 month summary</div>
+          <div className="text-black">Last 6 month summary</div>
           <TransposedTable data={data12} />
         </div>
         <div className="mt-6  bg-white/50 border-1 border-gray-500 rounded-xl flex items-center justify-center flex-col">
-          <div>Last 6 Days summary</div>
+          <div className="text-black">Last 6 Days summary</div>
           <Dailysummary data={data6} />
         </div>
         <div className="flex items-center text-sm text-black font-medium">

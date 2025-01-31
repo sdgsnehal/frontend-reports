@@ -1,4 +1,3 @@
-
 interface TransposedTableProps<T> {
   data: T[];
 }
@@ -10,7 +9,7 @@ const TransposedTable = <T extends Record<string, any>>({
 
   return (
     <div className="w-full max-h-[400px] max-w-[1200px] relative overflow-auto">
-      <table className="w-full text-xs border-[1px] border-[#E7E7E7] border-separate border-spacing-0">
+      <table className="w-full text-xs text-black border-[1px] border-[#E7E7E7] border-separate border-spacing-0">
         <thead className="sticky top-0 z-20">
           <tr className="bg-gray-100">
             <th className="table-heading">Category</th>

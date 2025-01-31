@@ -103,7 +103,7 @@ export default function MyModal() {
               className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out border border-gray-300 data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
               <div className="p-2">
-                <p className="text-sm font-medium">Date Range</p>
+                <p className="text-sm text-black font-medium">Date Range</p>
                 <Dropdown
                   Light={true}
                   Items={DateRange}
@@ -112,22 +112,22 @@ export default function MyModal() {
               </div>
               <div className="flex gap-2 justify-evenly p-2">
                 <div>
-                  <p className="text-sm font-medium">Starting</p>
+                  <p className="text-smt text-black font-medium">Starting</p>
                   <DatePicker
                     selected={startDate}
                     onChange={(date) => setStartDate(date)}
-                    className="p-[5px] rounded-md"
+                    className="p-[5px] rounded-md bg-white text-black"
                     showIcon
                     disabled={enableDatepicker}
                   />
                 </div>
 
                 <div>
-                  <p className="text-sm font-medium">Ending</p>
+                  <p className="text-sm text-black font-medium">Ending</p>
                   <DatePicker
                     selected={endDate}
                     onChange={(date) => setEndDate(date)}
-                    className="p-[5px] rounded-md"
+                    className="p-[5px] rounded-md bg-white text-black"
                     showIcon
                     disabled={enableDatepicker}
                   />
@@ -135,10 +135,12 @@ export default function MyModal() {
               </div>
               <div className="flex p-2 gap-2">
                 <CheckboxComponent onChange={CheckboxChange} />
-                <p className="text-sm font-medium">Compare to Previous Date</p>
+                <p className="text-sm text-black font-medium">
+                  Compare to Previous Date
+                </p>
               </div>
               <div className="p-2">
-                <p className="text-sm font-medium">Compare to</p>
+                <p className="text-sm text-black font-medium">Compare to</p>
                 <Dropdown
                   Light={true}
                   Items={CompareDateRange}
