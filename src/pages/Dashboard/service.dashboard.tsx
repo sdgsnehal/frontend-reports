@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import API from "../../lib/api-client";
 
-
 type SalesDashboardParams = {
   startDate: string;
   endDate: string;
@@ -16,9 +15,13 @@ export function useSalesDashboard({
   return useQuery({
     queryKey: ["sales-dashboard", startDate, endDate, merchantId],
     queryFn: async () => {
-      const response = await API("get", "/api/v1/fetch/dashboard", {
-        params: { startDate, endDate, merchantId },
-      });
+      const response = await API(
+        "get",
+        `/api/v1/fetch/dashboard?startDate=${startDate}&endDate=${endDate}&merchantId=${merchantId}`,
+        {
+          params: { startDate, endDate, merchantId },
+        }
+      );
       return response.data;
     },
     enabled: false,
