@@ -12,7 +12,7 @@ export const merchantSlice = createSlice({
   name: "merchant",
   initialState,
   reducers: {
-    selectMerchant: (state, action: PayloadAction<MerchantState>) => {   
+    selectMerchant: (state, action: PayloadAction<MerchantState>) => {
       return action.payload;
     },
   },

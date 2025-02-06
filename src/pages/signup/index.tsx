@@ -14,7 +14,7 @@ const Signup = () => {
   const {
     handleSubmit,
     control,
-    formState: { errors },
+    // formState: { errors },
   } = useForm<FormValues>({});
   const onSubmit = async (values: FormValues) => {
     const { email, password, fullName } = values;
