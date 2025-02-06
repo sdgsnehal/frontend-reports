@@ -1,7 +1,7 @@
 import { Linechart } from "../../components/charts/Linecharts/Linechart";
 import DashboardDropdown from "../../components/Dropdown/Dashboard/DashboardDropdown";
 import TransposedTable from "../../components/Table/Table";
-import { data12, data6 } from "../../utils/Constants";
+
 import Layout from "../Layout/Layout";
 import Dailysummary from "../../components/Table/DailySummary/Dailysummary";
 import CardComponent from "../../components/card";

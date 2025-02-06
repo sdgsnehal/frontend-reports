@@ -1,8 +1,8 @@
 import Layout from "../Layout/Layout";
 import GlobalTable from "../../components/Table/Global/GlobalTable";
-import Dropdown from "../../components/Dropdown/Dropdown";
-import { Linechart } from "../../components/charts/Linecharts/Linechart";
-import { MerchantList } from "../../utils/Constants";
+// import Dropdown from "../../components/Dropdown/Dropdown";
+// import { Linechart } from "../../components/charts/Linecharts/Linechart";
+// import { MerchantList } from "../../utils/Constants";
 import { useEffect, useRef, useState } from "react";
 import { useGlobal } from "./service.global";
 import { useDispatch, useSelector } from "react-redux";
@@ -67,11 +67,11 @@ const Global = () => {
           SELECT AN ACCOUNT
         </div>
         <div className="py-1 px-5">
-          <Dropdown Items={MerchantList} Light={true} />
+          {/* <Dropdown Items={MerchantList} Light={true}  /> */}
         </div>
 
         <div className="w-full h-1/2 flex items-center justify-center">
-          <Linechart title="Last 6 Months" legend="right" />
+          {/* <Linechart title="Last 6 Months" legend="right" /> */}
         </div>
       </div>
     </Layout>

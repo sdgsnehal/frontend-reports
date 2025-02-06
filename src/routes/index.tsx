@@ -9,6 +9,7 @@ import useObserveQuery from "../hooks/useObserveQuery";
 
 const AppRoutes = () => {
   const authData = useObserveQuery(["auth"]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const auth: any = authData?.data;
   return (
     <Routes>
