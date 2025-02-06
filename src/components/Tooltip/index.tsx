@@ -1,7 +1,15 @@
-// Tooltip.jsx
-import React, { useState } from "react";
+import { ReactNode, useState } from "react";
+interface TooltipProps {
+  children: ReactNode;
+  content: string;
+  position?: "top" | "bottom" | "left" | "right";
+}
 
-const Tooltip = ({ children, content, position = "top" }) => {
+const Tooltip: React.FC<TooltipProps> = ({
+  children,
+  content,
+  position = "top",
+}) => {
   const [visible, setVisible] = useState(false);
 
   const positionClasses = {
