@@ -7,7 +7,10 @@ export interface DailySales {
   _id: string;
   dailySales: number;
 }
-
+export interface DailySpend {
+  date: string;
+  dailySales: number;
+}
 export interface DailyAvgOrderValue {
   date: string;
   dailyAvgOrderValue: number;
@@ -24,9 +27,11 @@ interface SalesData {
   quantity: number;
   totalSales: number;
   totalAvgOrderValue: number;
+  totalSpend: number;
   dailyOrders: DailyOrders[];
   dailySales: DailySales[];
   dailyAvgOrderValue: DailyAvgOrderValue[];
+  dailySpend: DailySpend[];
   last7DaysSummary: []; // Assuming it's an empty array, you can specify a type if needed
   last6MonthsSummary: MonthlySummary[];
 }

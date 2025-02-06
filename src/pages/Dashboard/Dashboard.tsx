@@ -54,8 +54,14 @@ const Dashboard = () => {
             <Linechart title="Total Sales" chartData={data?.data?.dailySales} />
           </div>
           <div className="chart-container ">
-            <Chartheading ChartName="Total Profit" Value={25} />
-            {/* <Linechart title="Total Profit" /> */}
+            <Chartheading
+              ChartName="Total Spend"
+              Value={data?.data?.totalSpend}
+            />
+            <Linechart
+              title="Total Profit"
+              chartData={data?.data?.dailySpend}
+            />
           </div>
           <div className="chart-container ">
             <Chartheading ChartName="Total Order" Value={data.data.quantity} />
@@ -77,11 +83,11 @@ const Dashboard = () => {
         </div>
         <div className="mt-6  bg-white/50 border-1 border-gray-500 rounded-xl flex items-center justify-center flex-col">
           <div className="text-black">Last 6 month summary</div>
-          <TransposedTable data={data12} />
+          <TransposedTable data={data.data?.last6MonthsSummary} />
         </div>
         <div className="mt-6  bg-white/50 border-1 border-gray-500 rounded-xl flex items-center justify-center flex-col">
           <div className="text-black">Last 6 Days summary</div>
-          <Dailysummary data={data6} />
+          <Dailysummary data={data.data?.last7DaysSummary} />
         </div>
         <div className="flex items-center text-sm text-black font-medium">
           <p>Total Inventory turnout if sold at current | </p>

@@ -34,13 +34,16 @@ export default function MyModal() {
     startDate: null,
     endDate: null,
   });
-  const { data, refetch, isLoading } = useSalesDashboard({
+  const { data, refetch, isLoading, error } = useSalesDashboard({
     startDate: startDate?.toISOString() ?? "",
     endDate: endDate?.toISOString() ?? "",
     merchantId,
   });
   if (isLoading) {
     setLoading(isLoading);
+  }
+  if (error) {
+    setLoading(false);
   }
 
   useEffect(() => {
@@ -50,6 +53,7 @@ export default function MyModal() {
     ) {
       dispatch(DashboardData(data));
       lastGlobalDataRef.current = data;
+      setLoading(false);
     }
   }, [data, dispatch]);
   function open() {

@@ -14,7 +14,7 @@ const Dailysummary = <T extends Record<string, any>>({
             <th className="table-heading">Date</th>
             {data.map((row, index) => (
               <th key={index} className="table-heading">
-                {row.date}
+                {row._id}
               </th>
             ))}
           </tr>
@@ -23,9 +23,9 @@ const Dailysummary = <T extends Record<string, any>>({
           <tr>
             <th className="table-heading">Revenue</th>
             {data.map((row, index) => (
-              <td key={index} className="p-2 border border-gray-200">
-                <span>{row.revenue}</span>
-                <span
+              <td key={index} className="p-2 border border-gray-200 text-sm">
+                <span>{row.dailyRevenue}</span>
+                {/* <span
                   className={`ml-2 text-sm ${
                     row.revenueTrend === "up"
                       ? "text-green-600"
@@ -33,7 +33,7 @@ const Dailysummary = <T extends Record<string, any>>({
                   }`}
                 >
                   {row.revenueChange} {row.revenueTrend === "up" ? "↑" : "↓"}
-                </span>
+                </span> */}
               </td>
             ))}
           </tr>
@@ -41,8 +41,8 @@ const Dailysummary = <T extends Record<string, any>>({
           <tr>
             <th className="table-heading">Advertising Fees</th>
             {data.map((row, index) => (
-              <td key={index} className="p-2 border border-gray-200">
-                {row.advertisingFees}
+              <td key={index} className="p-2 border border-gray-200 text-sm">
+                {row.totalSpend}
               </td>
             ))}
           </tr>
@@ -50,7 +50,7 @@ const Dailysummary = <T extends Record<string, any>>({
           <tr>
             <th className="table-heading">Units Sold</th>
             {data.map((row, index) => (
-              <td key={index} className="p-2 border border-gray-200">
+              <td key={index} className="p-2 border border-gray-200 text-sm">
                 {row.unitsSold}
               </td>
             ))}

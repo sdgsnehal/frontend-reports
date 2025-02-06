@@ -5,14 +5,25 @@ import Global from "../pages/Global/Global";
 import Order from "../pages/order/Order";
 import Login from "../pages/login";
 import Signup from "../pages/signup";
+import useObserveQuery from "../hooks/useObserveQuery";
+
 const AppRoutes = () => {
+  const authData = useObserveQuery(["auth"]);
+  const auth: any = authData?.data;
   return (
     <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-      <Route path="/global" element={<Global />} />
-      <Route path="/order" element={<Order />} />
+      {auth?.isLoggedIn ? (
+        <>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/global" element={<Global />} />
+          <Route path="/order" element={<Order />} />
+        </>
+      ) : (
+        <>
+          <Route path="/" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </>
+      )}
     </Routes>
   );
 };

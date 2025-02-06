@@ -14,6 +14,7 @@ import {
   DailySales,
   DailyOrders,
   DailyAvgOrderValue,
+  DailySpend,
 } from "../../../store/interfaces/interface";
 type LegendPosition =
   | "top"
@@ -25,7 +26,7 @@ type LegendPosition =
 interface LinechartProps {
   title: string;
   legend?: LegendPosition;
-  chartData: DailySales[] | DailyOrders[] | DailyAvgOrderValue[];
+  chartData: DailySales[] | DailyOrders[] | DailyAvgOrderValue[] | DailySpend[];
 }
 
 ChartJS.register(

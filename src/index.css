@@ -8,7 +8,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* background-color: #242424; */
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -79,7 +79,7 @@ button:focus-visible {
     scrollbar-width: none; /* Firefox */
   }
   .table-heading {
-    @apply border border-gray-200 text-left;
+    @apply border border-gray-200 text-left text-sm font-semibold;
   }
   .chart-container {
     @apply w-full bg-white/50  border-gray-500 rounded-xl flex items-center  flex-col p-1;

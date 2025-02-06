@@ -15,7 +15,7 @@ const TransposedTable = <T extends Record<string, any>>({
             <th className="table-heading">Category</th>
             {data.map((row, index) => (
               <th key={index} className="table-heading">
-                {row.month}
+                {row.month}/{row.year}
               </th>
             ))}
           </tr>
@@ -26,7 +26,7 @@ const TransposedTable = <T extends Record<string, any>>({
             {data.map((row, index) => (
               <td key={index} className="p-2 border border-gray-200">
                 <span>{row.revenue}</span>
-                <span
+                {/* <span
                   className={`ml-2 text-sm ${
                     row.revenueTrend === "up"
                       ? "text-green-600"
@@ -34,7 +34,7 @@ const TransposedTable = <T extends Record<string, any>>({
                   }`}
                 >
                   {row.revenueChange} {row.revenueTrend === "up" ? "↑" : "↓"}
-                </span>
+                </span> */}
               </td>
             ))}
           </tr>
@@ -78,7 +78,7 @@ const TransposedTable = <T extends Record<string, any>>({
               </td>
             ))}
           </tr>
-          <tr>
+          {/* <tr>
             <th className="table-heading">Profit</th>
             {data.map((row, index) => (
               <td key={index} className="p-2 border border-gray-200">
@@ -92,12 +92,12 @@ const TransposedTable = <T extends Record<string, any>>({
                 </span>
               </td>
             ))}
-          </tr>
+          </tr> */}
           <tr>
             <th className="table-heading">Units Sold</th>
             {data.map((row, index) => (
               <td key={index} className="p-2 border border-gray-200">
-                {row.unitsSold}
+                <span>{row.unitsSold}</span>
               </td>
             ))}
           </tr>
