@@ -26,8 +26,7 @@ const Login = () => {
   const {
     handleSubmit,
     control,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    formState: { errors },
+    // formState: { errors },
   } = useForm<FormValues>({
     defaultValues: getDefaultValues(),
   });
