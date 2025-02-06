@@ -10,6 +10,8 @@ const GlobalTable = <T extends Record<string, any>>({
     "merchantEmail",
     "totalQuantity",
     "totalItemPrice",
+    "totalSpend",
+    "tacos"
   ],
 }: GlobalTableProps<T>) => {
   const keys = keysOrder.length ? keysOrder : Object.keys(data[0]);

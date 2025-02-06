@@ -56,12 +56,9 @@ const Dashboard = () => {
           <div className="chart-container ">
             <Chartheading
               ChartName="Total Spend"
-              Value={data?.data?.totalSpend}
+              Value={data?.data?.totalSpend?.toFixed(2)}
             />
-            <Linechart
-              title="Total Profit"
-              chartData={data?.data?.dailySpend}
-            />
+            <Linechart title="Total Spend" chartData={data?.data?.dailySpend} />
           </div>
           <div className="chart-container ">
             <Chartheading ChartName="Total Order" Value={data.data.quantity} />

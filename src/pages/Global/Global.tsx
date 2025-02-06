@@ -2,15 +2,13 @@ import Layout from "../Layout/Layout";
 import GlobalTable from "../../components/Table/Global/GlobalTable";
 import Dropdown from "../../components/Dropdown/Dropdown";
 import { Linechart } from "../../components/charts/Linecharts/Linechart";
-import { data } from "../../components/Table/data";
 import { MerchantList } from "../../utils/Constants";
-import { GlobalDateRange } from "../../utils/Constants";
 import { useEffect, useRef, useState } from "react";
-import { getDateRange } from "../../utils/dateUtils";
 import { useGlobal } from "./service.global";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store/store";
 import { GlobalData } from "../../store/getGlobalSlice";
+import DatePicker from "react-datepicker";
 
 const Global = () => {
   const [startDate, setStartDate] = useState<Date | null>(new Date());
@@ -18,11 +16,7 @@ const Global = () => {
   const globalDataTable = useSelector((state: RootState) => state.globalData);
   const lastGlobalDataRef = useRef(globalDataTable);
   const dispatch = useDispatch();
-  const {
-    data: global,
-    refetch,
-    isLoading,
-  } = useGlobal({
+  const { data: global, refetch } = useGlobal({
     startDate: startDate?.toISOString() ?? "",
     endDate: endDate?.toISOString() ?? "",
   });
@@ -36,14 +30,15 @@ const Global = () => {
     }
   }, [global, dispatch]);
 
-  const handleDropdownChange = (selectedItem: {
-    id: number | string;
-    name: string;
-  }) => {
-    const { startDate, endDate } = getDateRange(selectedItem.name);
-    setStartDate(startDate ? new Date(startDate) : null);
-    setEndDate(endDate ? new Date(endDate) : null);
-    refetch();
+  const handleDropdownChange = (dates: [Date | null, Date | null]) => {
+    if (Array.isArray(dates)) {
+      const [start, end] = dates;
+      setStartDate(start);
+      setEndDate(end || null);
+    }
+    if (startDate !== null && endDate !== null) {
+      refetch();
+    }
   };
 
   return (
@@ -54,10 +49,14 @@ const Global = () => {
             SELECT DATE RANGE
           </div>
           <div className="py-1 px-1">
-            <Dropdown
-              Items={GlobalDateRange}
-              Light={true}
+            <DatePicker
+              selected={startDate}
               onChange={handleDropdownChange}
+              startDate={startDate}
+              endDate={endDate}
+              selectsRange
+              showIcon
+              className="p-[5px] rounded-md bg-white text-black text-sm font-semibold"
             />
           </div>
         </div>

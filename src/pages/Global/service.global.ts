@@ -10,9 +10,13 @@ export function useGlobal({ startDate, endDate }: GlobalParams) {
   return useQuery({
     queryKey: ["global-report", startDate, endDate],
     queryFn: async () => {
-      const response = await API("get", "/api/v1/fetch/global", {
-        params: { startDate, endDate },
-      });
+      const response = await API(
+        "get",
+        `/api/v1/fetch/global?startDate=${startDate}&endDate=${endDate}`,
+        {
+          params: { startDate, endDate },
+        }
+      );
       return response.data;
     },
     enabled: false,
