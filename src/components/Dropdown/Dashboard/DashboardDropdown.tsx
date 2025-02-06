@@ -111,7 +111,7 @@ export default function MyModal() {
           <div className="flex min-h-full items-center justify-center p-4">
             <DialogPanel
               transition
-              className="w-full max-w-md rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out border border-gray-300 data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
+              className="w-full max-w-lg rounded-xl bg-white/5 p-6 backdrop-blur-2xl duration-300 ease-out border border-gray-300 data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0"
             >
               <div className="p-2">
                 <p className="text-sm text-black font-medium">Date Range</p>
