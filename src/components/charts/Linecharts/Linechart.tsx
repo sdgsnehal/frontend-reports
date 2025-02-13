@@ -71,6 +71,7 @@ export function Linechart({
       },
       tooltip: {
         callbacks: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           label: function (context: any) {
             const index = context.dataIndex;
             const dailyLabel = dailySalesLabels[index] ?? "-";
