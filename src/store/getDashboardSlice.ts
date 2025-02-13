@@ -8,15 +8,23 @@ const initialState: ApiResponse = {
     quantity: 0,
     totalSales: 0,
     totalAvgOrderValue: 0,
+    totalSpend: 0,
     dailyOrders: [],
     dailySales: [],
     dailyAvgOrderValue: [],
+    dailySalesCompare: [],
+    dailyAvgOrderValueCompare: [],
+    dailyOrdersCompare: [],
+    dailySpend: [],
+    compareDailySpend: [], 
     last7DaysSummary: [],
     last6MonthsSummary: [],
   },
   message: "test",
   success: true,
 };
+
+
 export const dashboardDataSlice = createSlice({
   name: "dashboardData",
   initialState,

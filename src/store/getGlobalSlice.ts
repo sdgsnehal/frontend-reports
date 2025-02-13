@@ -7,7 +7,7 @@ export const globalSlice = createSlice({
   name: "globalData",
   initialState,
   reducers: {
-    GlobalData: (state, action: PayloadAction<GlobalProps[]>) => {
+    GlobalData: (_state, action: PayloadAction<GlobalProps[]>) => {
       return action.payload;
     },
   },
