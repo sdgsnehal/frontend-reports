@@ -27,6 +27,11 @@ interface LinechartProps {
   title: string;
   legend?: LegendPosition;
   chartData: DailySales[] | DailyOrders[] | DailyAvgOrderValue[] | DailySpend[];
+  compareChartData:
+    | DailySales[]
+    | DailySpend[]
+    | DailyOrders[]
+    | DailyAvgOrderValue[];
 }
 
 ChartJS.register(
@@ -41,11 +46,19 @@ ChartJS.register(
 
 export function Linechart({
   title,
-  legend = "top",
+  legend = "bottom",
   chartData,
+  compareChartData,
 }: LinechartProps) {
   const labels = chartData?.map((item) => Object.values(item)?.[0]);
   const dailySalesData = chartData?.map((item) => Object.values(item)?.[1]);
+  const dailySalesLabels = chartData?.map(
+    (item) => `${Object.values(item)?.[0]}`
+  );
+  const compareData = compareChartData?.map((item) => Object.values(item)?.[1]);
+  const compareLabels = compareChartData?.map(
+    (item) => ` ${Object.values(item)?.[0]}`
+  );
   const options = {
     responsive: true,
     plugins: {
@@ -56,6 +69,19 @@ export function Linechart({
         display: true,
         text: title,
       },
+      tooltip: {
+        callbacks: {
+          label: function (context: any) {
+            const index = context.dataIndex;
+            const dailyLabel = dailySalesLabels[index] ?? "-";
+            const compareLabel = compareLabels[index] ?? "-";
+            const dailyValue = dailySalesData[index] ?? "-";
+            const compareValue = compareData[index] ?? "-";
+
+            return `${dailyLabel}:${dailyValue}, ${compareLabel}:${compareValue}`;
+          },
+        },
+      },
     },
   };
   const data = {
@@ -64,14 +90,15 @@ export function Linechart({
       {
         label: "Dataset 1",
         data: dailySalesData,
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        borderColor: "rgb(39, 68, 93)",
+        backgroundColor: "rgba(39, 68, 93,0.5)",
       },
       {
         label: "Dataset 2",
-        data: dailySalesData,
-        borderColor: "rgb(53, 162, 235)",
-        backgroundColor: "rgba(53, 162, 235, 0.5)",
+        data: compareData,
+        borderColor: "rgb(113, 187, 178)",
+        backgroundColor: "rgba(113, 187, 178,0.5)",
+        borderWidth: 1,
       },
     ],
   };

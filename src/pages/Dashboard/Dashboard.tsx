@@ -51,20 +51,30 @@ const Dashboard = () => {
               ChartName="Total Sales"
               Value={data?.data?.totalSales}
             />
-            <Linechart title="Total Sales" chartData={data?.data?.dailySales} />
+            <Linechart
+              title="Total Sales"
+              chartData={data?.data?.dailySales}
+              compareChartData={data?.data?.dailySalesCompare}
+            />
           </div>
           <div className="chart-container ">
             <Chartheading
               ChartName="Total Spend"
               Value={data?.data?.totalSpend?.toFixed(2)}
             />
-            <Linechart title="Total Spend" chartData={data?.data?.dailySpend} />
+            <Linechart
+              title="Total Spend"
+              chartData={data?.data?.dailySpend}
+              compareChartData={data?.data?.compareDailySpend}
+            />
           </div>
           <div className="chart-container ">
             <Chartheading ChartName="Total Order" Value={data.data.quantity} />
             <Linechart
               title="Total Order"
               chartData={data?.data?.dailyOrders}
+              compareChartData={data?.data?.dailyOrdersCompare}
+
             />
           </div>
           <div className="chart-container ">
@@ -75,6 +85,7 @@ const Dashboard = () => {
             <Linechart
               title="Average Order Value"
               chartData={data?.data?.dailyAvgOrderValue}
+              compareChartData={data?.data?.dailyAvgOrderValueCompare}
             />
           </div>
         </div>
