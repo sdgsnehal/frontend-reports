@@ -34,10 +34,14 @@ export default function MyModal() {
     startDate: null,
     endDate: null,
   });
+
   const { data, refetch, isLoading, error } = useSalesDashboard({
     startDate: startDate?.toISOString() ?? "",
     endDate: endDate?.toISOString() ?? "",
     merchantId,
+    isCompare: enableCheckbox,
+    startCompareDate: previousDateRange.startDate ?? "",
+    endCompareDate: previousDateRange.endDate ?? "",
   });
   if (isLoading) {
     setLoading(isLoading);
@@ -71,16 +75,24 @@ export default function MyModal() {
       setEnableDatePicker(false);
     }
     const { startDate, endDate } = getDateRange(selectedItem.name);
-    if (enableCheckbox) {
-      const prevRange = getPreviousDateRange(
-        startDate,
-        endDate,
-        "previous_period"
-      );
-      setPreviousDateRange(prevRange);
-    }
     setStartDate(startDate ? new Date(startDate) : null);
     setEndDate(endDate ? new Date(endDate) : null);
+  };
+  const handleCompareDateChange = (selectedItem: {
+    id: number | string;
+    name: string;
+  }) => {
+    if (!enableCheckbox) return; // Ensure the checkbox is enabled before setting values
+
+    const prevRange = getPreviousDateRange(
+      startDate ? startDate.toISOString() : null,
+      endDate ? endDate.toISOString() : null,
+      selectedItem.name === "Previous Year"
+        ? "previous_year"
+        : "previous_period"
+    );
+
+    setPreviousDateRange(prevRange);
   };
   const CheckboxChange = (enable: boolean) => {
     setEnableCheckbox(enable);
@@ -155,7 +167,7 @@ export default function MyModal() {
                 <Dropdown
                   Light={true}
                   Items={CompareDateRange}
-                  onChange={handleDropdownChange}
+                  onChange={handleCompareDateChange}
                   disabled={!enableCheckbox}
                 />
               </div>

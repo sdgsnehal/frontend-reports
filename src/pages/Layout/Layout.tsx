@@ -5,14 +5,14 @@ import {
   QuestionMarkCircleIcon,
 } from "@heroicons/react/16/solid";
 import { IoMenu } from "react-icons/io5";
-import { useNavigate } from "react-router-dom";
+import { useLogout } from "./service.logout";
 interface LayoutProps {
   children: ReactNode; // ReactNode allows passing any valid React child elements
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [isSidebarVisible, setSidebarVisible] = useState(true);
-  const navigate = useNavigate();
+  const logoutMutation = useLogout();
   return (
     <div className="w-full h-screen flex flex-col  overflow-x-hidden">
       <header className="w-full h-16  flex items-center justify-between px-4 text-black">
@@ -31,7 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <span
             className="flex items-center gap-2 bg-transparent text-black/70 text-sm hover:text-blue-400"
             onClick={() => {
-              navigate("/");
+              logoutMutation.mutate();
             }}
           >
             <ArrowRightStartOnRectangleIcon className="w-5 h-5" />
@@ -49,7 +49,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
         >
           {children}
           <div className="text-xs text-gray-600">
-            <span className="font-semibold text-gray-600">Copyright</span> © 2025 Amzfein All rights reserved.
+            <span className="font-semibold text-gray-600">Copyright</span> ©
+            2025 AmzFein All rights reserved.
           </div>
         </main>
       </div>

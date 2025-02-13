@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
-
+import quarterOfYear from "dayjs/plugin/quarterOfYear";
+dayjs.extend(quarterOfYear);
 export const getDateRange = (selectedRange: string) => {
   const today = dayjs();
   let startDate, endDate;

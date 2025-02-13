@@ -11,6 +11,7 @@ const AppRoutes = () => {
   const authData = useObserveQuery(["auth"]);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const auth: any = authData?.data;
+
   return (
     <Routes>
       {auth?.isLoggedIn ? (
@@ -25,6 +26,7 @@ const AppRoutes = () => {
           <Route path="/signup" element={<Signup />} />
         </>
       )}
+      <Route path="*" element={<Login />} />
     </Routes>
   );
 };
