@@ -9,6 +9,9 @@ type SalesDashboardParams = {
   startCompareDate: string;
   endCompareDate: string;
 };
+type GetSheetDataProps = {
+  merchantId: string | number;
+};
 
 export function useSalesDashboard({
   startDate,
@@ -34,6 +37,23 @@ export function useSalesDashboard({
         `/api/v1/fetch/dashboard?startDate=${startDate}&endDate=${endDate}&merchantId=${merchantId}&isCompare=${isCompare}&startCompareDate=${startCompareDate}&endCompareDate=${endCompareDate}`,
         {
           params: { startDate, endDate, merchantId },
+        }
+      );
+      return response.data;
+    },
+    enabled: false,
+  });
+}
+export function useGetSheetData({ merchantId }: GetSheetDataProps) {
+  console.log(merchantId);
+  return useQuery({
+    queryKey: ["get-sheet-data", merchantId],
+    queryFn: async () => {
+      const response = await API(
+        "get",
+        `/api/v1/fetch/data?merchantId=${merchantId}`,
+        {
+          params: { merchantId },
         }
       );
       return response.data;

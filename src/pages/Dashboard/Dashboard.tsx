@@ -7,10 +7,11 @@ import Dailysummary from "../../components/Table/DailySummary/Dailysummary";
 import CardComponent from "../../components/card";
 import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
-import { useLoading } from "../../components/loader/loadingContext";
 import Loader from "../../components/loader/loader";
 import { useForm, Controller } from "react-hook-form";
 import { ArrowPathRoundedSquareIcon } from "@heroicons/react/16/solid";
+import { useGetSheetData } from "./service.dashboard";
+import toast from "react-hot-toast";
 interface ChartheadingProps {
   ChartName: string;
   Value: string | number;
@@ -29,19 +30,34 @@ const Chartheading = ({ ChartName, Value }: ChartheadingProps) => {
 
 const Dashboard = () => {
   const data = useSelector((state: RootState) => state.dashboardData);
-  const { loading } = useLoading();
+  const merchantId = useSelector((state: RootState) => state.merchant.id);
+  const { isLoading, error, refetch, isSuccess } = useGetSheetData({
+    merchantId,
+  });
+
   const { control, setValue } = useForm<FormValues>({
     defaultValues: {
       selectedOption: "",
     },
   });
-
+  const handleFetchData = () => {
+    refetch(); // Manually trigger the API call
+  };
+  if (isSuccess) {
+    toast.success("Successfully fetched sheet data");
+  }
+  if (error) {
+    toast.error(error.message);
+  }
   return (
     <Layout>
       <div className="w-full  h-full overflow-x-hidden p-4 mx-auto">
         <div className="pb-4 flex items-center justify-between">
           <DashboardDropdown />
-          <span className="bg-blue-400 p-2 text-black flex items-center justify-center gap-1 cursor-pointer rounded-full hover:cursor-pointer">
+          <span
+            className="bg-blue-400 p-2 text-black flex items-center justify-center gap-1 cursor-pointer rounded-full hover:cursor-pointer"
+            onClick={handleFetchData}
+          >
             <ArrowPathRoundedSquareIcon className="w-4 h-4" />
           </span>
         </div>
@@ -74,7 +90,6 @@ const Dashboard = () => {
               title="Total Order"
               chartData={data?.data?.dailyOrders}
               compareChartData={data?.data?.dailyOrdersCompare}
-
             />
           </div>
           <div className="chart-container ">
@@ -130,7 +145,7 @@ const Dashboard = () => {
           <CardComponent />
         </div>
       </div>
-      {loading && (
+      {isLoading && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
           <Loader />
         </div>
