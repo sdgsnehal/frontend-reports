@@ -120,7 +120,7 @@ const Login = () => {
         </button>
         <p className="mt-4 text-center text-gray-500 text-sm">
           No account?{" "}
-          <a href="#" className="underline text-indigo-600">
+          <a href="/signup" className="underline text-indigo-600">
             Sign up
           </a>
         </p>
