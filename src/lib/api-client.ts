@@ -53,6 +53,7 @@ export default async function API(
       ...config,
     });
     return response;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     throw error.response;
   }

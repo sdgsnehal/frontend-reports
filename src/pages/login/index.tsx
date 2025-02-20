@@ -1,6 +1,7 @@
 import { Controller, useForm } from "react-hook-form";
 import secureLocalStorage from "react-secure-storage";
 import { messages } from "../../Language/en";
+import { GoogleLogin } from "@react-oauth/google";
 
 import { useLogin } from "./service.login";
 type FormValues = {
@@ -35,8 +36,6 @@ const Login = () => {
     if (email && password) {
       loginMutation.mutate({ ...values, email: values.email.trim() });
     }
-    //navigate("/dashboard");
-    console.log(email, password);
   };
   return (
     <div className="flex flex-col justify-center items-center w-full">
@@ -54,6 +53,14 @@ const Login = () => {
         <p className="text-lg font-semibold text-center text-black">
           Sign in to your account
         </p>
+        <GoogleLogin
+          onSuccess={(credentialResponse) => {
+            console.log(credentialResponse);
+          }}
+          onError={() => {
+            console.log("Login Failed");
+          }}
+        />
         <button className="button w-full flex items-center justify-center gap-3 px-5 py-2 mt-4 font-bold text-sm leading-5 text-gray-800 uppercase bg-white border border-gray-300 rounded-lg transition-transform duration-600 ease-in-out hover:scale-105">
           <svg
             xmlns="http://www.w3.org/2000/svg"
