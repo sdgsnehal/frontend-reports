@@ -42,8 +42,7 @@ export function useGoogleLoginService() {
   return useMutation({
     mutationFn: (values: GoogleLogin) =>
       API("post", "/api/v1/users/google-auth", values),
-    onSuccess: (data) => {
-      
+    onSuccess: (data) => { 
       const user = { data, isLoggedIn: true };
       queryClient.setQueryData(["auth"], user);
       secureLocalStorage.setItem("user", user);
