@@ -8,6 +8,10 @@ type Login = {
   password: string;
   remember?: boolean;
 };
+type GoogleLogin = {
+  credential?: string | undefined;
+  clientId?: string | undefined;
+};
 export function useLogin() {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -22,6 +26,24 @@ export function useLogin() {
       } else {
         secureLocalStorage.clear();
       }
+      const user = { data, isLoggedIn: true };
+      queryClient.setQueryData(["auth"], user);
+      secureLocalStorage.setItem("user", user);
+      navigate("/dashboard");
+    },
+    onError: () => {
+      toast.error("This didn't work.");
+    },
+  });
+}
+export function useGoogleLoginService() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (values: GoogleLogin) =>
+      API("post", "/api/v1/users/google-auth", values),
+    onSuccess: (data) => {
+      
       const user = { data, isLoggedIn: true };
       queryClient.setQueryData(["auth"], user);
       secureLocalStorage.setItem("user", user);
